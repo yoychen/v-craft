@@ -1,4 +1,5 @@
 import Node from '@/core/Node';
+import Editor from '@/core/Editor';
 
 export const createNode = (componentName = 'node') => new Node(componentName);
 
@@ -9,4 +10,17 @@ export const createSecondLevelNode = () => {
   parent.children = [node];
 
   return node;
+};
+
+export const createEditor = () => new Editor();
+
+export const createNodeMap = (amount) => {
+  const nodeMap = {};
+
+  for (let i = 0; i < amount; i += 1) {
+    const node = createNode();
+    nodeMap[node.uuid] = node;
+  }
+
+  return nodeMap;
 };
