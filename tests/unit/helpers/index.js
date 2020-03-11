@@ -1,5 +1,6 @@
 import Node from '@/core/Node';
 import Editor from '@/core/Editor';
+import Indicator from '@/core/Indicator';
 
 export const createNode = (componentName = 'node') => new Node(componentName);
 
@@ -24,3 +25,5 @@ export const createNodeMap = (amount) => {
 
   return nodeMap;
 };
+
+export const createIndicator = () => new Indicator();
