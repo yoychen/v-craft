@@ -1,5 +1,3 @@
-import Node from '@/core/Node';
-
 class Editor {
   constructor(nodes = [], resolverMap) {
     this.nodeMap = {};
@@ -36,27 +34,6 @@ class Editor {
 
   findResolver(name) {
     return this.resolverMap[name];
-  }
-
-  createNodeFromVNode(vnode, parentNode = null) {
-    if (!vnode.componentInstance) {
-      return null;
-    }
-
-    const componentName = vnode.componentOptions.tag;
-    const props = vnode.componentInstance.$props;
-
-    const node = new Node(componentName, props, parentNode);
-
-    const defaultSlots = vnode.componentInstance.$slots.default;
-    const children = defaultSlots
-      ? defaultSlots
-        .map((childVnode) => this.createNodeFromVNode(childVnode, node))
-        .filter((childNode) => !!childNode)
-      : [];
-    node.children = children;
-
-    return node;
   }
 }
 
