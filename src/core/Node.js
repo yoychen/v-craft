@@ -119,36 +119,36 @@ class Node {
     incommingNode.parent = this;
   }
 
-  insertBefore(targetNode) {
-    const parentOfTargetNode = targetNode.parent;
-    if (!parentOfTargetNode) {
-      throw new Error('Target node has no parent.');
+  canBeSibling(targetNode) {
+    if (!targetNode.parent) {
+      return false;
     }
-    const indexOfTargetNode = parentOfTargetNode.children.indexOf(targetNode);
 
-    if (!parentOfTargetNode.isDroppable(this)) {
-      throw Error('The parent node of the target node is not droppable.');
+    return targetNode.parent.isDroppable(this);
+  }
+
+  insertBefore(targetNode) {
+    if (!this.canBeSibling(targetNode)) {
+      throw new Error('Can not be the sibling of the target node.');
     }
 
     this.makeOrphan();
 
+    const parentOfTargetNode = targetNode.parent;
+    const indexOfTargetNode = parentOfTargetNode.children.indexOf(targetNode);
     parentOfTargetNode.children.splice(indexOfTargetNode, 0, this);
     this.parent = parentOfTargetNode;
   }
 
   insertAfter(targetNode) {
-    const parentOfTargetNode = targetNode.parent;
-    if (!parentOfTargetNode) {
-      throw new Error('Target node has no parent.');
-    }
-    const indexOfTargetNode = parentOfTargetNode.children.indexOf(targetNode);
-
-    if (!parentOfTargetNode.isDroppable(this)) {
-      throw Error('The parent node of the target node is not droppable.');
+    if (!this.canBeSibling(targetNode)) {
+      throw new Error('Can not be the sibling of the target node.');
     }
 
     this.makeOrphan();
 
+    const parentOfTargetNode = targetNode.parent;
+    const indexOfTargetNode = parentOfTargetNode.children.indexOf(targetNode);
     parentOfTargetNode.children.splice(indexOfTargetNode + 1, 0, this);
     this.parent = parentOfTargetNode;
   }

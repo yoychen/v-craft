@@ -276,13 +276,33 @@ describe('append', () => {
   });
 });
 
+describe('canBeSibling', () => {
+  it('returns false when the parent of the target node does not exist', () => {
+    const node = createNode();
+    const targetNode = createNode();
+
+    const canBeSibling = node.canBeSibling(targetNode);
+
+    expect(canBeSibling).toBe(false);
+  });
+
+  it('returns false when the parent of the target node is not droppable', () => {
+    const node = createNode();
+    const targetNode = createSecondLevelNode();
+    targetNode.parent.isDroppable = () => false;
+
+    const canBeSibling = node.canBeSibling(targetNode);
+
+    expect(canBeSibling).toBe(false);
+  });
+});
+
 describe('insertBefore', () => {
   it('is moved to the place in front of the target node', () => {
     const node = createNode();
     const targetNode = createSecondLevelNode();
     const parentOfTargetNode = targetNode.parent;
-
-    parentOfTargetNode.isDroppable = () => true;
+    node.canBeSibling = () => true;
 
     node.insertBefore(targetNode);
 
@@ -293,9 +313,7 @@ describe('insertBefore', () => {
   it('called makeOrphan() before it is moved', () => {
     const node = createNode();
     const targetNode = createSecondLevelNode();
-    const parentOfTargetNode = targetNode.parent;
-
-    parentOfTargetNode.isDroppable = () => true;
+    node.canBeSibling = () => true;
 
     node.makeOrphan = jest.fn();
 
@@ -304,22 +322,11 @@ describe('insertBefore', () => {
     expect(node.makeOrphan.mock.calls.length).toEqual(1);
   });
 
-  it('thorws error when the parent node of the target node is not droppable', () => {
+  it('throws error when the return value of canBeSibling() is false', () => {
     const node = createNode();
     const targetNode = createSecondLevelNode();
-    const parentOfTargetNode = targetNode.parent;
 
-    parentOfTargetNode.isDroppable = () => false;
-
-    expect(() => node.insertBefore(targetNode)).toThrow();
-
-    expect(parentOfTargetNode.children).not.toEqual([node, targetNode]);
-    expect(node.parent).not.toEqual(parentOfTargetNode);
-  });
-
-  it('throws error when target node\'s parent is null', () => {
-    const node = createNode();
-    const targetNode = createNode();
+    node.canBeSibling = () => false;
 
     expect(() => node.insertBefore(targetNode)).toThrow();
   });
@@ -330,8 +337,7 @@ describe('insertAfter', () => {
     const node = createNode();
     const targetNode = createSecondLevelNode();
     const parentOfTargetNode = targetNode.parent;
-
-    parentOfTargetNode.isDroppable = () => true;
+    node.canBeSibling = () => true;
 
     node.insertAfter(targetNode);
 
@@ -342,9 +348,7 @@ describe('insertAfter', () => {
   it('called makeOrphan() before it is moved', () => {
     const node = createNode();
     const targetNode = createSecondLevelNode();
-    const parentOfTargetNode = targetNode.parent;
-
-    parentOfTargetNode.isDroppable = () => true;
+    node.canBeSibling = () => true;
 
     node.makeOrphan = jest.fn();
 
@@ -353,19 +357,11 @@ describe('insertAfter', () => {
     expect(node.makeOrphan.mock.calls.length).toEqual(1);
   });
 
-  it('thorws error when the parent node of the target node is not droppable', () => {
+  it('throws error when the return value of canBeSibling() is false', () => {
     const node = createNode();
     const targetNode = createSecondLevelNode();
-    const parentOfTargetNode = targetNode.parent;
 
-    parentOfTargetNode.isDroppable = () => false;
-
-    expect(() => node.insertAfter(targetNode)).toThrow();
-  });
-
-  it('throws error when target node\'s parent is null', () => {
-    const node = createNode();
-    const targetNode = createNode();
+    node.canBeSibling = () => false;
 
     expect(() => node.insertAfter(targetNode)).toThrow();
   });
