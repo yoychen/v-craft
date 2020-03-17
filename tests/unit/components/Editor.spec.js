@@ -25,8 +25,8 @@ describe('initialization', () => {
   });
 });
 
-describe('initialization', () => {
-  it('renders root element by component props', () => {
+describe('view', () => {
+  it('renders root element by component prop', () => {
     const wrapper = shallowMountEditor({
       component: 'div',
     });

@@ -33,6 +33,8 @@ export const createFakeEditor = () => {
   const fakeEditor = sinon.createStubInstance(Editor);
   fakeEditor.nodes = [];
   fakeEditor.findResolver = () => 'div';
+  fakeEditor.indicator = sinon.createStubInstance(Indicator);
+  fakeEditor.draggedNode = sinon.createStubInstance(Node);
 
   return fakeEditor;
 };

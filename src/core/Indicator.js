@@ -18,8 +18,8 @@ class Indicator {
     this.isForbidden = false;
   }
 
-  setForbidden() {
-    this.isForbidden = true;
+  setIsForbidden(bool) {
+    this.isForbidden = bool;
   }
 
   showIndicator() {

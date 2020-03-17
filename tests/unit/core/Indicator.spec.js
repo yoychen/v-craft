@@ -13,11 +13,11 @@ describe('hide', () => {
   });
 });
 
-describe('setForbidden', () => {
-  it('sets isForbidden attribute to true', () => {
+describe('setIsForbidden', () => {
+  it('sets isForbidden attribute', () => {
     const indicator = createIndicator();
 
-    indicator.setForbidden();
+    indicator.setIsForbidden(true);
 
     expect(indicator.isForbidden).toBe(true);
   });

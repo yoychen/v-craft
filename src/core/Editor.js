@@ -1,9 +1,12 @@
+import Indicator from './Indicator';
+
 class Editor {
   constructor(nodes = [], resolverMap) {
     this.nodeMap = {};
     this.selectedNode = null;
     this.draggedNode = null;
     this.resolverMap = resolverMap;
+    this.indicator = new Indicator();
 
     this.setTopLevelNodes(nodes);
   }
