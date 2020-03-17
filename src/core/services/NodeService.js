@@ -36,11 +36,9 @@ class NodeService {
   }
 
   handleElementDragOver(cursor) {
-    const { clientX } = cursor;
-
     this.editor.indicator.setIsForbidden(!this.editor.draggedNode.canBeSibling(this.currentNode));
 
-    if (this.onLeftHelf(clientX)) {
+    if (this.onLeftHelf(cursor)) {
       this.editor.indicator.pointBefore(this.element);
     } else {
       this.editor.indicator.pointAfter(this.element);
@@ -64,6 +62,44 @@ class NodeService {
     } else {
       this.handleElementDragOver(cursor);
     }
+  }
+
+  handleElementDrop(cursor) {
+    const { draggedNode } = this.editor;
+
+    if (!draggedNode.canBeSibling(this.currentNode)) {
+      return;
+    }
+
+    if (this.onLeftHelf(cursor)) {
+      draggedNode.insertBefore(this.currentNode);
+    } else {
+      draggedNode.insertAfter(this.currentNode);
+    }
+  }
+
+  handleCanvasDrop(cursor) {
+    const { draggedNode } = this.editor;
+
+    if (this.onEdge(cursor)) {
+      this.handleElementDrop(cursor);
+      return;
+    }
+
+    if (this.currentNode.isDroppable(draggedNode)) {
+      this.currentNode.append(draggedNode);
+    }
+  }
+
+  handleDrop(cursor) {
+    if (this.currentNode.isCanvas()) {
+      this.handleCanvasDrop(cursor);
+    } else {
+      this.handleElementDrop(cursor);
+    }
+
+    this.editor.dragNode(null);
+    this.editor.indicator.hide();
   }
 }
 

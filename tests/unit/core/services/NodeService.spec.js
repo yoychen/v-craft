@@ -114,3 +114,90 @@ describe('handleElementDragOver', () => {
     expect(nodeService.editor.indicator.pointAfter.mock.calls.length).toBe(1);
   });
 });
+
+describe('handleElementDrop', () => {
+  it('calls insertBefore() when the cursor is on the left hand of element and the target node is allow to be inserted', () => {
+    const nodeService = createNodeService();
+    nodeService.onLeftHelf = () => true;
+    nodeService.editor.draggedNode.canBeSibling = () => true;
+    nodeService.editor.draggedNode.insertBefore = jest.fn();
+    const cursor = createCursor(210, 210);
+
+    nodeService.handleElementDrop(cursor);
+
+    expect(nodeService.editor.draggedNode.insertBefore.mock.calls.length).toBe(1);
+  });
+
+  it('does not call insertBefore() when the cursor is on the left hand of element and the target node is not allow to be inserted', () => {
+    const nodeService = createNodeService();
+    nodeService.onLeftHelf = () => true;
+    nodeService.editor.draggedNode.canBeSibling = () => false;
+    nodeService.editor.draggedNode.insertBefore = jest.fn();
+    const cursor = createCursor(210, 210);
+
+    nodeService.handleElementDrop(cursor);
+
+    expect(nodeService.editor.draggedNode.insertBefore.mock.calls.length).toBe(0);
+  });
+
+  it('calls insertAfter() when the cursor is not on the left hand of element and the target node is allow to be inserted', () => {
+    const nodeService = createNodeService();
+    nodeService.onLeftHelf = () => false;
+    nodeService.editor.draggedNode.canBeSibling = () => true;
+    nodeService.editor.draggedNode.insertAfter = jest.fn();
+    const cursor = createCursor(210, 210);
+
+    nodeService.handleElementDrop(cursor);
+
+    expect(nodeService.editor.draggedNode.insertAfter.mock.calls.length).toBe(1);
+  });
+
+  it('does not call insertAfter() when the cursor is not on the left hand of element and the target node is not allow to be inserted', () => {
+    const nodeService = createNodeService();
+    nodeService.onLeftHelf = () => false;
+    nodeService.editor.draggedNode.canBeSibling = () => false;
+    nodeService.editor.draggedNode.insertAfter = jest.fn();
+    const cursor = createCursor(210, 210);
+
+    nodeService.handleElementDrop(cursor);
+
+    expect(nodeService.editor.draggedNode.insertAfter.mock.calls.length).toBe(0);
+  });
+});
+
+describe('handleCanvasDrop', () => {
+  it('calls append() when the cursor is not on the edge of element and the current node is droppable', () => {
+    const nodeService = createNodeService();
+    nodeService.onEdge = () => false;
+    nodeService.currentNode.isDroppable = () => true;
+    nodeService.currentNode.append = jest.fn();
+    const cursor = createCursor(210, 210);
+
+    nodeService.handleCanvasDrop(cursor);
+
+    expect(nodeService.currentNode.append.mock.calls.length).toBe(1);
+  });
+
+  it('does not call append() when the cursor is not on the edge of element and the current node is not droppable', () => {
+    const nodeService = createNodeService();
+    nodeService.onEdge = () => false;
+    nodeService.currentNode.isDroppable = () => false;
+    nodeService.currentNode.append = jest.fn();
+    const cursor = createCursor(210, 210);
+
+    nodeService.handleCanvasDrop(cursor);
+
+    expect(nodeService.currentNode.append.mock.calls.length).toBe(0);
+  });
+
+  it('calls handleElementDrop() when the cursor is on the edge of element', () => {
+    const nodeService = createNodeService();
+    nodeService.onEdge = () => true;
+    nodeService.handleElementDrop = jest.fn();
+    const cursor = createCursor(210, 210);
+
+    nodeService.handleCanvasDrop(cursor);
+
+    expect(nodeService.handleElementDrop.mock.calls.length).toBe(1);
+  });
+});

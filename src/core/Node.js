@@ -120,6 +120,10 @@ class Node {
   }
 
   canBeSibling(targetNode) {
+    if (targetNode === this) {
+      return false;
+    }
+
     if (!targetNode.parent) {
       return false;
     }

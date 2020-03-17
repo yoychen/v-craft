@@ -12,6 +12,7 @@ function createFakeIndicator() {
       height: 300,
     },
     isForbidden: false,
+    show: true,
   };
 }
 
@@ -26,7 +27,7 @@ function shallowMountIndicator(props) {
 }
 
 describe('view', () => {
-  it('renders .indicator whose style is computed from indicator prop', async () => {
+  it('renders .indicator whose style is computed from indicator prop', () => {
     document.querySelector = () => ({
       scrollTop: 15,
     });
@@ -39,12 +40,21 @@ describe('view', () => {
     expect(wrapper.element.style.height).toBe('300px');
   });
 
-  it('adds forbidden css class in .indicator when isForbidden attribute of indicator prop is true', async () => {
+  it('adds forbidden css class in .indicator when isForbidden attribute of indicator prop is true', () => {
     const indicator = createFakeIndicator();
     indicator.isForbidden = true;
 
     const wrapper = shallowMountIndicator({ indicator });
 
     expect(wrapper.contains('.forbidden')).toBe(true);
+  });
+
+  it('hides .indicator when show attribue of of indicator prop is false', () => {
+    const indicator = createFakeIndicator();
+    indicator.show = false;
+
+    const wrapper = shallowMountIndicator({ indicator });
+
+    expect(wrapper.contains('.indicator')).toBe(false);
   });
 });

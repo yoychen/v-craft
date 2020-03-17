@@ -5,6 +5,8 @@
     :draggable="node.isDraggable()"
     @dragstart.native="handleDragStart"
     @dragover.native="handleDragOver"
+    @drop.native="handleDrop"
+    @dragend.native="handleDragEnd"
   >
     <Node
       v-for="(node, index) in node.children" :key="index"
@@ -50,6 +52,20 @@ export default {
         clientX: event.clientX,
         clientY: event.clientY,
       });
+    },
+    handleDrop(event) {
+      this.cancelDefault(event);
+
+      this.nodeService.handleDrop({
+        clientX: event.clientX,
+        clientY: event.clientY,
+      });
+    },
+    handleDragEnd(event) {
+      event.stopPropagation();
+
+      this.editor.dragNode(null);
+      this.editor.indicator.hide();
     },
   },
 };

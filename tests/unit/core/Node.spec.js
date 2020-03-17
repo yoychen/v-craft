@@ -295,6 +295,16 @@ describe('canBeSibling', () => {
 
     expect(canBeSibling).toBe(false);
   });
+
+  it('returns false when the target node is itself', () => {
+    const node = createSecondLevelNode();
+    const targetNode = node;
+    targetNode.parent.isDroppable = () => true;
+
+    const canBeSibling = node.canBeSibling(targetNode);
+
+    expect(canBeSibling).toBe(false);
+  });
 });
 
 describe('insertBefore', () => {

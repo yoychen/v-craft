@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="this.indicator.show"
     class="indicator"
     :class="{ forbidden: this.indicator.isForbidden }"
     :style="getIndicatorStyle()"
@@ -36,7 +37,7 @@ export default {
 <style lang="scss" scoped>
 .indicator {
   position: fixed;
-  background-color: rgb(24, 255, 178);
+  background-color: rgb(15, 177, 88);
   transition: all 0.3s;
 
   &.forbidden {
