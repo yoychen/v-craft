@@ -29,11 +29,8 @@ export default {
   ],
   data() {
     return {
-      nodeService: null,
+      nodeService: new NodeService(this),
     };
-  },
-  mounted() {
-    this.nodeService = new NodeService(this.node, this.editor, this.$el);
   },
   methods: {
     cancelDefault(event) {
