@@ -1,3 +1,4 @@
+import sinon from 'sinon';
 import Node from '@/core/Node';
 import Editor from '@/core/Editor';
 import Indicator from '@/core/Indicator';
@@ -27,3 +28,11 @@ export const createNodeMap = (amount) => {
 };
 
 export const createIndicator = () => new Indicator();
+
+export const createFakeEditor = () => {
+  const fakeEditor = sinon.createStubInstance(Editor);
+  fakeEditor.nodes = [];
+  fakeEditor.findResolver = () => 'div';
+
+  return fakeEditor;
+};

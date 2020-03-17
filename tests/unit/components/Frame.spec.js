@@ -1,22 +1,13 @@
 import Vue from 'vue';
-import sinon from 'sinon';
 import { shallowMount } from '@vue/test-utils';
 import FrameComponent from '@/components/Frame.vue';
-import Editor from '@/core/Editor';
 import createNodeFromVNode from '@/utils/createNodeFromVNode';
 import {
-  createNode,
+  createNode, createFakeEditor,
 } from '../helpers';
 
 jest.mock('@/utils/createNodeFromVNode.js');
 createNodeFromVNode.mockReturnValue(createNode());
-
-function createFakeEditor() {
-  const fakeEditor = sinon.createStubInstance(Editor);
-  fakeEditor.nodes = [];
-
-  return fakeEditor;
-}
 
 function shallowMountFrame(props, defaultSlot = [], mocks) {
   const defaultMocks = {
@@ -54,7 +45,7 @@ describe('initialization', () => {
 });
 
 describe('view', () => {
-  it('renders root element by component props', () => {
+  it('renders root element by component prop', () => {
     const wrapper = shallowMountFrame({
       component: 'div',
     });
@@ -81,7 +72,7 @@ describe('view', () => {
     const wrapper = shallowMountFrame({
       component: 'div',
     }, [], { editor });
-    expect(wrapper.vm.$children.length).toBe(3);
+    expect(wrapper.vm.$children.length).toBe(4); // contains <Indicator />
   });
 
   it('hides default slots after mounted life cycle', async () => {

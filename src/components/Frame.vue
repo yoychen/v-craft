@@ -5,16 +5,18 @@
       v-for="(node, index) in editor.nodes" :key="index"
       :node="node"
     />
+    <Indicator :indicator="editor.indicator" />
   </component>
 </template>
 
 <script>
 import Node from './Node.vue';
+import Indicator from './Indicator.vue';
 import createNodeFromVNode from '../utils/createNodeFromVNode';
 
 export default {
   components: {
-    Node,
+    Node, Indicator,
   },
   props: {
     component: [Object, String],
