@@ -14,7 +14,7 @@ export const createSecondLevelNode = () => {
   return node;
 };
 
-export const createEditor = () => new Editor();
+export const createEditor = (nodes = [], resolverMap = {}) => new Editor(nodes, resolverMap);
 
 export const createNodeMap = (amount) => {
   const nodeMap = {};

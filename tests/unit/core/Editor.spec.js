@@ -68,15 +68,15 @@ describe('dragNode', () => {
 
 describe('findResolver', () => {
   it('finds the resolver by the name of the resolver', () => {
-    const editor = createEditor();
-    editor.resolverMap = {
+    const resolverMap = {
       Heading: { name: 'Heading' },
       Card: { name: 'Card' },
       Button: { name: 'Button' },
     };
+    const editor = createEditor([], resolverMap);
 
     const component = editor.findResolver('Card');
 
-    expect(component).toEqual(editor.resolverMap.Card);
+    expect(component).toEqual(resolverMap.Card);
   });
 });
