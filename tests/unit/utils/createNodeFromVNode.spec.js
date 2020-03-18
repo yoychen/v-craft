@@ -1,5 +1,5 @@
 import createNodeFromVNode from '@/utils/createNodeFromVNode';
-import { createNode } from '../helpers';
+import { createNode, createFakeEditor } from '../helpers';
 
 describe('createNodeFromVNode', () => {
   function createVNodeStub(tag = 'div', props = {}, defaultSlots = null) {
@@ -23,21 +23,41 @@ describe('createNodeFromVNode', () => {
     return ngVNode;
   }
 
+  let editor;
+  let resolver;
+
+  beforeEach(() => {
+    editor = createFakeEditor();
+    resolver = {
+      craft: {
+        rules: {
+          canMoveIn: () => {},
+          canMoveOut: () => {},
+          canDrag: () => {},
+        },
+        addition: {},
+      },
+    };
+    editor.findResolver = () => resolver;
+  });
+
   it('creates Node instance from VNode instance', () => {
     const componentName = 'Counter';
     const props = { amount: 1 };
     const vnode = createVNodeStub(componentName, props);
 
-    const node = createNodeFromVNode(vnode);
+    const node = createNodeFromVNode(editor, vnode);
 
     expect(node.componentName).toBe(componentName);
     expect(node.props).toBe(props);
+    expect(Object.is(node.rules, resolver.craft.rules)).toBe(true);
+    expect(Object.is(node.addition, resolver.craft.addition)).toBe(true);
   });
 
   it('returns null when componentInstance of VNode instance is null', () => {
     const vnode = createNgVNodeStub();
 
-    const node = createNodeFromVNode(vnode);
+    const node = createNodeFromVNode(editor, vnode);
 
     expect(node).toBe(null);
   });
@@ -48,7 +68,7 @@ describe('createNodeFromVNode', () => {
       createVNodeStub(),
     ]);
 
-    const node = createNodeFromVNode(vnode);
+    const node = createNodeFromVNode(editor, vnode);
 
     expect(node.children.length).toBe(2);
   });
@@ -60,7 +80,7 @@ describe('createNodeFromVNode', () => {
       ngVNode,
     ]);
 
-    const node = createNodeFromVNode(vnode);
+    const node = createNodeFromVNode(editor, vnode);
 
     expect(node.children.length).toBe(1);
   });
@@ -69,7 +89,7 @@ describe('createNodeFromVNode', () => {
     const vnode = createVNodeStub();
     const parentNode = createNode();
 
-    const node = createNodeFromVNode(vnode, parentNode);
+    const node = createNodeFromVNode(editor, vnode, parentNode);
 
     expect(node.parent).toBe(parentNode);
   });
@@ -80,7 +100,7 @@ describe('createNodeFromVNode', () => {
       createVNodeStub(),
     ]);
 
-    const node = createNodeFromVNode(vnode);
+    const node = createNodeFromVNode(editor, vnode);
 
     node.children.forEach((child) => {
       expect(child.parent).toBe(node);

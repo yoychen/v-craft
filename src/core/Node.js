@@ -1,12 +1,13 @@
 import { v4 as uuidv4 } from 'uuid';
 
 class Node {
-  constructor(componentName, props = {}, parent = null, children = [], rules = {}) {
+  constructor(componentName, props = {}, parent = null, children = [], rules = {}, addition = {}) {
     this.componentName = componentName;
     this.props = props;
     this.parent = parent;
     this.children = children;
     this.rules = rules;
+    this.addition = addition;
     this.uuid = uuidv4();
   }
 
@@ -84,7 +85,9 @@ class Node {
       return false;
     }
 
-    if (!incommingNode.isDraggable()) {
+    if (incommingNode.parent
+      && incommingNode.parent.rules.canMoveOut
+      && !incommingNode.parent.rules.canMoveOut(incommingNode, incommingNode.parent)) {
       return false;
     }
 

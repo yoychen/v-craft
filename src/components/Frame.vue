@@ -43,7 +43,7 @@ export default {
     createNodesFromSlots() {
       const defaultSlots = this.$slots.default || [];
       return defaultSlots
-        .map((vnode) => createNodeFromVNode(vnode))
+        .map((vnode) => createNodeFromVNode(this.editor, vnode))
         .filter((node) => !!node);
     },
   },

@@ -148,8 +148,7 @@ describe('isAncestor', () => {
 describe('isDroppable', () => {
   it('returns true when rule does not exist', () => {
     const node = createNode('Canvas');
-    const target = createNode();
-    target.isDraggable = () => true;
+    const target = createSecondLevelNode();
     node.isAncestor = () => false;
 
     const isDroppable = node.isDroppable(target);
@@ -168,7 +167,6 @@ describe('isDroppable', () => {
   it('returns true when rule is passed', () => {
     const node = createNode('Canvas');
     const target = createNode();
-    target.isDraggable = () => true;
     node.isAncestor = () => false;
     node.rules.canMoveIn = () => true;
 
@@ -180,7 +178,6 @@ describe('isDroppable', () => {
   it('returns false when rule is not passed', () => {
     const node = createNode('Canvas');
     const target = createNode();
-    target.isDraggable = () => true;
     node.isAncestor = () => false;
     node.rules.canMoveIn = () => false;
 
@@ -192,7 +189,6 @@ describe('isDroppable', () => {
   it('returns false when the incomming node is ancestry', () => {
     const node = createNode('Canvas');
     const target = createNode();
-    target.isDraggable = () => true;
     node.isAncestor = () => true;
 
     const isDroppable = node.isDroppable(target);
@@ -208,10 +204,11 @@ describe('isDroppable', () => {
     expect(isDroppable).toBe(false);
   });
 
-  it('returns false when the incomming node is not draggable', () => {
+  it('returns false when the result of canMoveOut() of the incomming node\'s parent is false', () => {
     const node = createNode('Canvas');
-    const target = createNode();
-    target.isDraggable = () => false;
+    const target = createSecondLevelNode();
+    node.isAncestor = () => false;
+    target.parent.rules.canMoveOut = () => false;
 
     const isDroppable = node.isDroppable(target);
 
