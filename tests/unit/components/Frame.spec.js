@@ -34,14 +34,6 @@ describe('initialization', () => {
 
     expect(editor.setTopLevelNodes.mock.calls.length).toBe(1);
   });
-
-  it('sets showSlots attribute to false after called setTopLevelNodes() of editor', () => {
-    const wrapper = shallowMountFrame({
-      component: 'div',
-    }, []);
-
-    expect(wrapper.vm.showSlots).toBe(false);
-  });
 });
 
 describe('view', () => {
@@ -50,15 +42,6 @@ describe('view', () => {
       component: 'div',
     });
     expect(wrapper.contains('div')).toBe(true);
-  });
-
-  it('renders default slots into the root element', () => {
-    const wrapper = shallowMountFrame({
-      component: 'div',
-    }, [
-      '<span>content</span>',
-    ]);
-    expect(wrapper.contains('div span')).toBe(true);
   });
 
   it('renders top level nodes', () => {

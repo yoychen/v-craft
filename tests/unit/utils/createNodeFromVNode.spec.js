@@ -2,23 +2,19 @@ import createNodeFromVNode from '@/utils/createNodeFromVNode';
 import { createNode, createFakeEditor } from '../helpers';
 
 describe('createNodeFromVNode', () => {
-  function createVNodeStub(tag = 'div', props = {}, defaultSlots = null) {
+  function createVNodeStub(tag = 'div', props = {}, children = null) {
     return {
-      componentInstance: {
-        $props: props,
-        $slots: {
-          default: defaultSlots,
-        },
-      },
       componentOptions: {
         tag,
+        propsData: props,
+        children,
       },
     };
   }
 
   function createNgVNodeStub() {
     const ngVNode = createVNodeStub();
-    ngVNode.componentInstance = null;
+    ngVNode.componentOptions = null;
 
     return ngVNode;
   }
@@ -54,7 +50,7 @@ describe('createNodeFromVNode', () => {
     expect(Object.is(node.addition, resolver.craft.addition)).toBe(true);
   });
 
-  it('returns null when componentInstance of VNode instance is null', () => {
+  it('returns null when componentOptions of VNode instance is null', () => {
     const vnode = createNgVNodeStub();
 
     const node = createNodeFromVNode(editor, vnode);

@@ -1,8 +1,7 @@
 <template>
   <component :is="component">
-    <slot v-if="showSlots"></slot>
     <Node
-      v-for="(node, index) in editor.nodes" :key="index"
+      v-for="node in editor.nodes" :key="node.uuid"
       :node="node"
     />
     <Indicator :indicator="editor.indicator" />
@@ -24,11 +23,6 @@ export default {
   inject: [
     'editor',
   ],
-  data() {
-    return {
-      showSlots: true,
-    };
-  },
   created() {
     if (!this.editor) {
       throw new Error('<Frame/> must be wrapped with <Editor/>.');
@@ -37,7 +31,6 @@ export default {
   mounted() {
     const nodes = this.createNodesFromSlots();
     this.editor.setTopLevelNodes(this.editor.nodes.concat(nodes));
-    this.showSlots = false;
   },
   methods: {
     createNodesFromSlots() {

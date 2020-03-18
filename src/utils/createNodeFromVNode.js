@@ -2,7 +2,6 @@ import Node from '../core/Node';
 
 function getCraftConfigFromResolver(resolver) {
   const config = {
-    defaultProps: {},
     rules: {},
     addition: {},
   };
@@ -19,22 +18,21 @@ function getCraftConfigFromResolver(resolver) {
 }
 
 function createNodeFromVNode(editor, vnode, parentNode = null) {
-  if (!vnode.componentInstance) {
+  if (!vnode.componentOptions) {
     return null;
   }
 
   const componentName = vnode.componentOptions.tag;
-  const props = vnode.componentInstance.$props;
+  const props = vnode.componentOptions.propsData;
 
   const resolver = editor.findResolver(componentName);
   const { rules, addition } = getCraftConfigFromResolver(resolver);
 
   const node = new Node(componentName, props, parentNode, [], rules, addition);
 
-  const defaultSlots = vnode.componentInstance.$slots.default;
-  const children = defaultSlots
-    ? defaultSlots
-      .map((childVNode) => createNodeFromVNode(editor, childVNode, node))
+  const vnodeChildren = vnode.componentOptions.children;
+  const children = vnodeChildren
+    ? vnodeChildren.map((childVNode) => createNodeFromVNode(editor, childVNode, node))
       .filter((childNode) => !!childNode)
     : [];
   node.children = children;
