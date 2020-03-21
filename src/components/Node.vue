@@ -7,9 +7,10 @@
     @dragover.native="handleDragOver"
     @drop.native="handleDrop"
     @dragend.native="handleDragEnd"
+    @click.native="selectNode"
   >
     <Node
-      v-for="(node, index) in node.children" :key="index"
+      v-for="node in node.children" :key="node.uuid"
       :node="node"
     />
   </component>
@@ -63,6 +64,11 @@ export default {
 
       this.editor.dragNode(null);
       this.editor.indicator.hide();
+    },
+    selectNode(event) {
+      event.stopPropagation();
+
+      this.editor.selectNode(this.node);
     },
   },
 };
