@@ -32,6 +32,7 @@ describe('createNodeFromVNode', () => {
           canDrag: () => {},
         },
         addition: {},
+        defaultProps: {},
       },
     };
     editor.findResolver = () => resolver;
@@ -45,9 +46,27 @@ describe('createNodeFromVNode', () => {
     const node = createNodeFromVNode(editor, vnode);
 
     expect(node.componentName).toBe(componentName);
-    expect(node.props).toBe(props);
-    expect(Object.is(node.rules, resolver.craft.rules)).toBe(true);
-    expect(Object.is(node.addition, resolver.craft.addition)).toBe(true);
+    expect(node.props).toStrictEqual(props);
+    expect(node.rules).toStrictEqual(resolver.craft.rules);
+    expect(node.addition).toStrictEqual(resolver.craft.addition);
+  });
+
+  it('creates Node instance whose props is the Union of the component\'s default props and VNode\'s props', () => {
+    const componentName = 'Counter';
+    const props = { amount: 1 };
+    const vnode = createVNodeStub(componentName, props);
+
+    resolver.craft.defaultProps = {
+      amount: 0,
+      color: 'green',
+    };
+
+    const node = createNodeFromVNode(editor, vnode);
+
+    expect(node.props).toStrictEqual({
+      amount: 1,
+      color: 'green',
+    });
   });
 
   it('returns null when componentOptions of VNode instance is null', () => {
