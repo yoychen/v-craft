@@ -1,6 +1,7 @@
 <template>
   <component
     :is="component"
+    v-bind="$attrs"
     draggable="true"
     @dragstart="handleDragStart"
     @dragend="handleDragEnd"
