@@ -12,10 +12,5 @@ export default {
   inject: [
     'editor',
   ],
-  methods: {
-    getCraftOption() {
-      return this.component.craft || {};
-    },
-  },
 };
 </script>
