@@ -22,6 +22,7 @@ import ElementSidebar from './components/ElementSidebar.vue';
 import Container from './components/elements/Container.vue';
 import Paragraph from './components/elements/Paragraph.vue';
 import Heading from './components/elements/Heading.vue';
+import Picture from './components/elements/Picture.vue';
 
 export default {
   name: 'App',
@@ -31,7 +32,7 @@ export default {
   data() {
     return {
       resolverMap: {
-        Canvas, Container, Paragraph, Heading,
+        Canvas, Container, Paragraph, Heading, Picture,
       },
     };
   },

@@ -17,6 +17,12 @@
         <Paragraph />
       </template>
     </Blueprint>
+
+    <Blueprint :component="ElementBlock" icon="crop_original">
+      <template v-slot:blueprint>
+        <Picture />
+      </template>
+    </Blueprint>
   </div>
 </template>
 
@@ -26,10 +32,11 @@ import Canvas from '@/components/Canvas.vue';
 import ElementBlock from './ElementBlock.vue';
 import Paragraph from './elements/Paragraph.vue';
 import Heading from './elements/Heading.vue';
+import Picture from './elements/Picture.vue';
 
 export default {
   components: {
-    Blueprint, Canvas, Paragraph, Heading,
+    Blueprint, Canvas, Paragraph, Heading, Picture,
   },
   data() {
     return {
