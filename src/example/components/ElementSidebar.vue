@@ -6,6 +6,12 @@
       </template>
     </Blueprint>
 
+    <Blueprint :component="ElementBlock" icon="title">
+      <template v-slot:blueprint>
+        <Heading />
+      </template>
+    </Blueprint>
+
     <Blueprint :component="ElementBlock" icon="notes">
       <template v-slot:blueprint>
         <Paragraph />
@@ -19,10 +25,11 @@ import Blueprint from '@/components/Blueprint.vue';
 import Canvas from '@/components/Canvas.vue';
 import ElementBlock from './ElementBlock.vue';
 import Paragraph from './elements/Paragraph.vue';
+import Heading from './elements/Heading.vue';
 
 export default {
   components: {
-    Blueprint, Canvas, Paragraph,
+    Blueprint, Canvas, Paragraph, Heading,
   },
   data() {
     return {
