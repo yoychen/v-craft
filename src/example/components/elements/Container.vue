@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :style="elementCSS">
+  <div class="container" :class="{ 'node-selected': nodeState.isSelected }" :style="elementCSS">
     <slot />
   </div>
 </template>
@@ -13,6 +13,9 @@ import elementStyleMixin from './elementStyleMixin';
 
 export default {
   mixins: [elementStyleMixin],
+  props: {
+    nodeState: Object,
+  },
   craft: {
     defaultProps: {
       elementStyle: {
