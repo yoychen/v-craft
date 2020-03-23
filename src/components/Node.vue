@@ -2,6 +2,7 @@
   <component
     :is="editor.findResolver(node.componentName)"
     v-bind="node.props"
+    :nodeState="nodeState"
     :draggable="node.isDraggable()"
     @dragstart.native="handleDragStart"
     @dragover.native="handleDragOver"
@@ -32,6 +33,13 @@ export default {
     return {
       nodeService: new NodeService(this),
     };
+  },
+  computed: {
+    nodeState() {
+      return {
+        isSelected: this.node === this.editor.selectedNode,
+      };
+    },
   },
   methods: {
     cancelDefault(event) {
