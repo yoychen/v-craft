@@ -25,6 +25,7 @@ export default {
         'font-size': 14,
         'font-weight': 'normal',
         'text-align': 'left',
+        'line-height': '1.5',
         color: 'rgb(0,0,0)',
         'margin-top': 0,
         'margin-left': 0,

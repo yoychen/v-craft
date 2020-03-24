@@ -20,6 +20,14 @@
       </el-radio-group>
     </el-form-item>
 
+    <el-form-item label="Line Height" v-if="styleExist('line-height')">
+      <el-radio-group :value="getStyle('line-height')" @input="setStyle('line-height', $event)">
+        <el-radio-button label="1"></el-radio-button>
+        <el-radio-button label="1.5"></el-radio-button>
+        <el-radio-button label="2"></el-radio-button>
+      </el-radio-group>
+    </el-form-item>
+
     <el-form-item label="Color" v-if="styleExist('color')">
       <el-color-picker
         show-alpha

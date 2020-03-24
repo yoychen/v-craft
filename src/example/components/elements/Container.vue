@@ -9,6 +9,8 @@ import Margin from './styleSettings/Margin.vue';
 import Padding from './styleSettings/Padding.vue';
 import Alignment from './styleSettings/Alignment.vue';
 import Dimensions from './styleSettings/Dimensions.vue';
+import Decoration from './styleSettings/Decoration.vue';
+import Background from './styleSettings/Background.vue';
 import elementStyleMixin from './elementStyleMixin';
 
 export default {
@@ -32,6 +34,17 @@ export default {
         'flex-direction': 'column',
         'justify-content': 'flex-start',
         'align-items': 'flex-start',
+        'border-radius': 0,
+        'box-shadow': {
+          x: 0,
+          y: 0,
+          blur: 0,
+          spread: 0,
+          color: 'rgba(0,0,0,0)',
+        },
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
+        'background-attachment': 'scroll',
       },
     },
     addition: {
@@ -40,6 +53,8 @@ export default {
         Alignment,
         Margin,
         Padding,
+        Decoration,
+        Background,
       },
     },
   },
@@ -52,5 +67,8 @@ export default {
   width: 100%;
   box-sizing: border-box;
   border: 1px dashed rgb(22, 170, 238);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <el-form label-position="top" size="mini" :model="elementProps">
-    <el-form-item label="內容">
+    <el-form-item label="Content">
       <el-input type="textarea" :value="elementProps.content" @input="updateContent" />
     </el-form-item>
   </el-form>
