@@ -23,6 +23,12 @@
         <Picture />
       </template>
     </Blueprint>
+
+    <Blueprint :component="ElementBlock" icon="view_carousel">
+      <template v-slot:blueprint>
+        <Carousel />
+      </template>
+    </Blueprint>
   </div>
 </template>
 
@@ -33,10 +39,11 @@ import ElementBlock from './ElementBlock.vue';
 import Paragraph from './elements/Paragraph.vue';
 import Heading from './elements/Heading.vue';
 import Picture from './elements/Picture.vue';
+import Carousel from './elements/Carousel.vue';
 
 export default {
   components: {
-    Blueprint, Canvas, Paragraph, Heading, Picture,
+    Blueprint, Canvas, Paragraph, Heading, Picture, Carousel,
   },
   data() {
     return {
