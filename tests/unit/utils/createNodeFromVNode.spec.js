@@ -4,6 +4,7 @@ import { createNode, createFakeEditor } from '../helpers';
 describe('createNodeFromVNode', () => {
   function createVNodeStub(tag = 'div', props = {}, children = null) {
     return {
+      data: {},
       componentOptions: {
         tag,
         propsData: props,
@@ -55,6 +56,26 @@ describe('createNodeFromVNode', () => {
     const componentName = 'Counter';
     const props = { amount: 1 };
     const vnode = createVNodeStub(componentName, props);
+
+    resolver.craft.defaultProps = {
+      amount: 0,
+      color: 'green',
+    };
+
+    const node = createNodeFromVNode(editor, vnode);
+
+    expect(node.props).toStrictEqual({
+      amount: 1,
+      color: 'green',
+    });
+  });
+
+  test('the Node\'s props is the Union of the component\'s default props and the VNode\'s attrs when the component\'s name is Canvas', () => {
+    const componentName = 'Canvas';
+    const vnode = createVNodeStub(componentName);
+    vnode.data.attrs = {
+      amount: 1,
+    };
 
     resolver.craft.defaultProps = {
       amount: 0,

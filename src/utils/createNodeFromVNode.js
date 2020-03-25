@@ -32,7 +32,11 @@ function createNodeFromVNode(editor, vnode, parentNode = null) {
   }
 
   const componentName = vnode.componentOptions.tag;
-  const props = vnode.componentOptions.propsData;
+  let props = vnode.componentOptions.propsData;
+
+  if (componentName === 'Canvas' && vnode.data.attrs) {
+    props = { ...props, ...vnode.data.attrs };
+  }
 
   const { rules, addition, defaultProps } = getCraftConfig(componentName, props, editor);
   const nodeProps = { ...defaultProps, ...props };
