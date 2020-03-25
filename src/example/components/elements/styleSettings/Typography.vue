@@ -36,6 +36,47 @@
       />
     </el-form-item>
 
+    <label class="el-form-item__label">Shadow</label>
+
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <el-form-item label="x" v-if="styleExist('text-shadow')">
+          <el-slider
+            :max="20"
+            :value="getStyle('text-shadow').x"
+            @input="updateTextShadow('x', $event)"
+          />
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="y" v-if="styleExist('text-shadow')">
+          <el-slider
+            :max="20"
+            :value="getStyle('text-shadow').y"
+            @input="updateTextShadow('y', $event)"
+          />
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="blur" v-if="styleExist('text-shadow')">
+          <el-slider
+            :max="20"
+            :value="getStyle('text-shadow').blur"
+            @input="updateTextShadow('blur', $event)"
+          />
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="color" v-if="styleExist('text-shadow')">
+          <el-color-picker
+            show-alpha
+            :value="getStyle('text-shadow').color"
+            @active-change="updateTextShadow('color', $event)"
+          />
+        </el-form-item>
+      </el-col>
+    </el-row>
+
   </el-form>
 </template>
 
@@ -44,5 +85,14 @@ import mixin from './mixin';
 
 export default {
   mixins: [mixin],
+  methods: {
+    updateTextShadow(key, value) {
+      const textShadow = this.getStyle('text-shadow');
+      this.setStyle('text-shadow', {
+        ...textShadow,
+        [key]: value,
+      });
+    },
+  },
 };
 </script>

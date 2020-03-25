@@ -13,6 +13,9 @@ export default {
         'background-image': (url) => (url !== 'none'
           ? `url('${url}')`
           : url),
+        'text-shadow': ({
+          x, y, blur, color,
+        }) => `${x}px ${y}px ${blur}px ${color}`,
       };
 
       Object.entries(this.elementStyle).forEach(([key, value]) => {

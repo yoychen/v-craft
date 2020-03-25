@@ -35,6 +35,12 @@ export default {
         'padding-left': 0,
         'padding-bottom': 0,
         'padding-right': 0,
+        'text-shadow': {
+          x: 0,
+          y: 0,
+          blur: 0,
+          color: 'rgba(0,0,0,0)',
+        },
       },
     },
     addition: {
