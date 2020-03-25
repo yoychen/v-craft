@@ -29,6 +29,16 @@
         <Carousel />
       </template>
     </Blueprint>
+
+    <Blueprint :component="ElementBlock" icon="view_column">
+      <template v-slot:blueprint>
+        <Canvas component='Container' v-bind="rowProps">
+          <Canvas component='Container' />
+          <Canvas component='Container' />
+          <Canvas component='Container' />
+        </Canvas>
+      </template>
+    </Blueprint>
   </div>
 </template>
 
@@ -40,6 +50,7 @@ import Paragraph from './elements/Paragraph.vue';
 import Heading from './elements/Heading.vue';
 import Picture from './elements/Picture.vue';
 import Carousel from './elements/Carousel.vue';
+import Container from './elements/Container.vue';
 
 export default {
   components: {
@@ -48,6 +59,12 @@ export default {
   data() {
     return {
       ElementBlock,
+      rowProps: {
+        elementStyle: {
+          ...Container.craft.defaultProps.elementStyle,
+          'flex-direction': 'row',
+        },
+      },
     };
   },
 };
