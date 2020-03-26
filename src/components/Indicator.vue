@@ -39,6 +39,7 @@ export default {
   position: fixed;
   background-color: rgb(15, 177, 88);
   transition: all 0.3s;
+  z-index: 1000;
 
   &.forbidden {
     background-color: rgb(255, 24, 93);
