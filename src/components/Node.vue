@@ -2,6 +2,7 @@
   <component
     :is="editor.findResolver(node.componentName)"
     v-bind="node.props"
+    :class="{ 'cf-node-selected': isSelected }"
     :draggable="node.isDraggable()"
     @dragstart.native="handleDragStart"
     @dragover.native="handleDragOver"
@@ -32,6 +33,11 @@ export default {
     return {
       nodeService: new NodeService(this),
     };
+  },
+  computed: {
+    isSelected() {
+      return this.node === this.editor.selectedNode;
+    },
   },
   provide() {
     return {
