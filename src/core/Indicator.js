@@ -1,5 +1,5 @@
 class Indicator {
-  constructor(barSize = 3) {
+  constructor(barSize = 2) {
     this.barSize = barSize;
     this.show = false;
     this.position = {

@@ -25,7 +25,7 @@ class NodeService {
     return false;
   }
 
-  onEdge({ clientX, clientY }, edgeThickness = 5) {
+  onEdge({ clientX, clientY }, edgeThickness = 8) {
     const {
       offsetTop, offsetLeft, offsetWidth, offsetHeight,
     } = this.getElement();
