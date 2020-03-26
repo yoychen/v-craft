@@ -7,9 +7,19 @@ class Editor {
     this.selectedNode = null;
     this.draggedNode = null;
     this.indicator = new Indicator();
+    this.enabled = true;
 
     this.setTopLevelNodes(nodes);
     this.setResolverMap(resolverMap);
+  }
+
+  enable() {
+    this.enabled = true;
+  }
+
+  disable() {
+    this.selectNode(null);
+    this.enabled = false;
   }
 
   setResolverMap(resolverMap) {
