@@ -27,6 +27,10 @@ class Node {
     this.parent = null;
   }
 
+  delete() {
+    return this.makeOrphan();
+  }
+
   setParent(parent) {
     if (!parent.isDroppable(this)) {
       throw new Error('Parent node is not droppable.');
