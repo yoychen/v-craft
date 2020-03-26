@@ -1,19 +1,35 @@
 <template>
   <div class="sidebar">
-    <el-collapse>
-      <el-collapse-item
-        v-for="(component, name) in settingComponents"
-        :key="name"
-        :title="name"
-        :name="name"
-      >
-        <component
-          :is="component"
-          :elementProps="elementProps"
-          :elementPropsSetter="elementPropsSetter"
-        />
-      </el-collapse-item>
-    </el-collapse>
+    <div class="content" :class="{ 'has-actions': showActions }">
+      <el-collapse>
+        <el-collapse-item
+          v-for="(component, name) in settingComponents"
+          :key="name"
+          :title="name"
+          :name="name"
+        >
+          <component
+            :is="component"
+            :elementProps="elementProps"
+            :elementPropsSetter="elementPropsSetter"
+          />
+        </el-collapse-item>
+      </el-collapse>
+    </div>
+
+    <div v-if="showActions" class="actions">
+      <el-button
+        @click="deleteNode"
+        type="danger"
+        icon="el-icon-delete"
+        plain
+        circle></el-button>
+      <el-button
+        @click="focusParent"
+        icon="el-icon-top-right"
+        plain
+        circle></el-button>
+    </div>
   </div>
 </template>
 
@@ -40,24 +56,74 @@ export default {
         ? this.selectedNode.addition.settingComponents
         : {};
     },
+    showActions() {
+      return this.selectedNode && this.selectedNode.parent;
+    },
+  },
+  methods: {
+    deleteNode() {
+      this.$confirm('This will permanently delete this element. Continue?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      }).then(() => {
+        this.editor.removeNode(this.selectedNode);
+      });
+    },
+    focusParent() {
+      const { parent } = this.selectedNode;
+      this.editor.selectNode(parent);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+$actions-height: 50px;
+
 .sidebar {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   width: 250px;
+  background-color: white;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding: 0 20px;
   overflow-y: auto;
-  background-color: white;
+
+  &.has-actions {
+    bottom: $actions-height;
+  }
+}
+
+.actions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: $actions-height;
+  line-height: $actions-height;
+  padding: 0 0.8em;
+  border-top: 1px solid #eee;
+  button {
+    padding: 7px;
+    & + button {
+      margin-left: 6px;
+    }
+  }
 }
 </style>
 
 <style lang="scss">
+.sidebar {
   .el-collapse-item__header {
     font-size: 16px;
   }
@@ -70,4 +136,5 @@ export default {
   .el-slider {
     margin: 0 10px;
   }
+}
 </style>
