@@ -2,7 +2,6 @@
   <component
     :is="headingType"
     class="heading"
-    :class="{ 'node-selected': nodeState.isSelected }"
     :style="elementCSS"
   >{{ content }}</component>
 </template>
@@ -19,7 +18,6 @@ export default {
   props: {
     headingType: String,
     content: String,
-    nodeState: Object,
   },
   craft: {
     defaultProps: {

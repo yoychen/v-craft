@@ -2,7 +2,6 @@
   <el-carousel
     :height="`${height}px`"
     :interval="interval"
-    :class="{ 'node-selected': nodeState.isSelected }"
     :style="elementCSS"
   >
     <el-carousel-item
@@ -30,7 +29,6 @@ export default {
     height: Number,
     interval: Number,
     slides: Array,
-    nodeState: Object,
   },
   craft: {
     defaultProps: {

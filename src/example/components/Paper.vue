@@ -13,7 +13,7 @@
   box-shadow: 0 14px 24px -6px #474d4730;
   background-color: white;
 
-  .node-selected {
+  .cf-node-selected {
     outline: #1faee5 solid 2px;;
   }
 }

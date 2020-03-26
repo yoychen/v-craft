@@ -2,7 +2,6 @@
   <img
     class="image"
     :src="imageUrl"
-    :class="{ 'node-selected': nodeState.isSelected }"
     :style="elementCSS"
   />
 </template>
@@ -17,7 +16,6 @@ export default {
   mixins: [elementStyleMixin],
   props: {
     imageUrl: String,
-    nodeState: Object,
   },
   craft: {
     defaultProps: {

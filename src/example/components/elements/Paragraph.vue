@@ -1,6 +1,5 @@
 <template>
   <p
-    :class="{ 'node-selected': nodeState.isSelected }"
     :style="elementCSS"
   >{{ content }}</p>
 </template>
@@ -16,7 +15,6 @@ export default {
   mixins: [elementStyleMixin],
   props: {
     content: String,
-    nodeState: Object,
   },
   craft: {
     defaultProps: {
