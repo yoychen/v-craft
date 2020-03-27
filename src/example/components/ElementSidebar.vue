@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" :class="{ disable: !this.editor.enabled }">
     <Blueprint :component="ElementBlock" icon="crop_square">
       <template v-slot:blueprint>
         <Canvas component='Container' />
@@ -56,6 +56,9 @@ export default {
   components: {
     Blueprint, Canvas, Paragraph, Heading, Picture, Carousel,
   },
+  inject: [
+    'editor',
+  ],
   data() {
     return {
       ElementBlock,
@@ -82,5 +85,11 @@ export default {
   padding: 10px 0;
   overflow: auto;
   background-color: $color-black;
+
+  transition: 0.2s transform;
+  transition-timing-function: ease-in-out;
+  &.disable {
+    transform: translateX(-100%);
+  }
 }
 </style>

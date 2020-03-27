@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" :class="{ disable: !this.editor.enabled }">
     <div class="content" :class="{ 'has-actions': showActions }">
       <el-collapse>
         <el-collapse-item
@@ -88,6 +88,12 @@ $actions-height: 50px;
   bottom: 0;
   width: $setting-sidebar-width;
   background-color: white;
+
+  transition: 0.2s transform;
+  transition-timing-function: ease-in-out;
+  &.disable {
+    transform: translateX(100%);
+  }
 }
 
 .content {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :style="elementCSS">
+  <div class="container" :class="{ outline: editor.enabled }" :style="elementCSS">
     <slot />
   </div>
 </template>
@@ -15,6 +15,9 @@ import elementStyleMixin from './elementStyleMixin';
 
 export default {
   mixins: [elementStyleMixin],
+  inject: [
+    'editor',
+  ],
   craft: {
     defaultProps: {
       elementStyle: {
@@ -63,9 +66,12 @@ export default {
   display: flex;
   width: 100%;
   box-sizing: border-box;
-  border: 1px dashed rgb(22, 170, 238);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  &.outline {
+    outline: 1px dashed rgb(22, 170, 238);
+  }
 }
 </style>

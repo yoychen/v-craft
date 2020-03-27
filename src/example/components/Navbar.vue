@@ -6,12 +6,36 @@
       <a href="#">Import</a>
       <a href="#">Export</a>
       <el-switch
+        :value="enabled"
+        @input="updateState"
         active-color="#13ce66"
         inactive-color="#ff4949">
       </el-switch>
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  inject: [
+    'editor',
+  ],
+  computed: {
+    enabled() {
+      return this.editor.enabled;
+    },
+  },
+  methods: {
+    updateState(enabled) {
+      if (enabled) {
+        this.editor.enable();
+      } else {
+        this.editor.disable();
+      }
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 @import '../app.scss';
