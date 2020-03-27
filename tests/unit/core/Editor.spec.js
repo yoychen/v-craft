@@ -80,3 +80,26 @@ describe('findResolver', () => {
     expect(component).toEqual(resolverMap.Card);
   });
 });
+
+describe('removeNode', () => {
+  it('calls makeOrphan() of the node paramenter', () => {
+    const editor = createEditor();
+    const node = createNode();
+    node.makeOrphan = jest.fn();
+
+    editor.removeNode(node);
+
+    expect(node.makeOrphan.mock.calls.length).toEqual(1);
+  });
+
+  it('sets the selectedNode attribute to null when the selectedNode attribute is equal to the node paramenter', () => {
+    const editor = createEditor();
+    const node = createNode();
+    node.makeOrphan = jest.fn();
+    editor.selectNode(node);
+
+    editor.removeNode(node);
+
+    expect(editor.selectedNode).toEqual(null);
+  });
+});

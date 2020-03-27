@@ -57,6 +57,14 @@ class Editor {
   findResolver(name) {
     return this.resolverMap[kebabCase(name)];
   }
+
+  removeNode(node) {
+    node.makeOrphan();
+
+    if (node === this.selectedNode) {
+      this.selectNode(null);
+    }
+  }
 }
 
 export default Editor;
