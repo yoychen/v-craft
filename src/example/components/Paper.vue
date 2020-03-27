@@ -6,9 +6,6 @@
 
 <style lang="scss">
 .paper {
-  margin: 2em;
-  margin-left: 90px;
-  margin-right: 300px;
   border: 1px solid #eee;
   box-shadow: 0 14px 24px -6px #474d4730;
   background-color: white;

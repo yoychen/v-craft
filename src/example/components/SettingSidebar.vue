@@ -22,12 +22,10 @@
         @click="deleteNode"
         type="danger"
         icon="el-icon-delete"
-        plain
         circle></el-button>
       <el-button
         @click="focusParent"
         icon="el-icon-top-right"
-        plain
         circle></el-button>
     </div>
   </div>
@@ -79,14 +77,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../app.scss';
+
 $actions-height: 50px;
 
 .sidebar {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: $navbar-height;
   right: 0;
   bottom: 0;
-  width: 250px;
+  width: $setting-sidebar-width;
   background-color: white;
 }
 
@@ -96,8 +96,8 @@ $actions-height: 50px;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 0 20px;
-  overflow-y: auto;
+  padding: 5px 20px;
+  overflow: auto;
 
   &.has-actions {
     bottom: $actions-height;
@@ -124,6 +124,9 @@ $actions-height: 50px;
 
 <style lang="scss">
 .sidebar {
+  .el-collapse {
+    border: none;
+  }
   .el-collapse-item__header {
     font-size: 16px;
   }

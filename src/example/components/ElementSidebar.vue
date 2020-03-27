@@ -71,14 +71,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../app.scss';
+
 .sidebar {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: $navbar-height;
   left: 0;
   bottom: 0;
-  width: 60px;
+  width: $element-sidebar-width;
   padding: 10px 0;
-  overflow-y: auto;
-  background-color: #171717;
+  overflow: auto;
+  background-color: $color-black;
 }
 </style>
