@@ -25,10 +25,12 @@ describe('setIsForbidden', () => {
 
 function createElementStub() {
   return {
-    offsetTop: 50,
-    offsetLeft: 40,
-    offsetHeight: 200,
-    offsetWidth: 600,
+    getBoundingClientRect: () => ({
+      top: 50,
+      left: 40,
+      height: 200,
+      width: 600,
+    }),
   };
 }
 
@@ -45,7 +47,7 @@ describe('pointBefore', () => {
       left: 40, // element.offsetLeft
     });
     expect(indicator.size).toStrictEqual({
-      width: 3,
+      width: 2,
       height: 200, // element.offsetHeight
     });
   });
@@ -64,7 +66,7 @@ describe('pointAfter', () => {
       left: 640, // element.offsetLeft + element.offsetWidth
     });
     expect(indicator.size).toStrictEqual({
-      width: 3,
+      width: 2,
       height: 200, // element.offsetHeight
     });
   });
@@ -92,7 +94,7 @@ describe('pointInside', () => {
     });
     expect(indicator.size).toStrictEqual({
       width: 555, // element.offsetWidth - element.paddingLeft - element.paddingRight
-      height: 3,
+      height: 2,
     });
   });
 });

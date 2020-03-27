@@ -5,10 +5,12 @@ import {
 
 function createFakeElement() {
   return {
-    offsetHeight: 200,
-    offsetWidth: 200,
-    offsetLeft: 200,
-    offsetTop: 200,
+    getBoundingClientRect: () => ({
+      height: 200,
+      width: 200,
+      left: 200,
+      top: 200,
+    }),
   };
 }
 
