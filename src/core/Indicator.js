@@ -29,21 +29,27 @@ class Indicator {
   pointBefore(element) {
     this.showIndicator();
 
-    this.position.top = element.offsetTop;
-    this.position.left = element.offsetLeft;
+    const { top, left, height } = element.getBoundingClientRect();
+
+    this.position.top = top;
+    this.position.left = left;
 
     this.size.width = this.barSize;
-    this.size.height = element.offsetHeight;
+    this.size.height = height;
   }
 
   pointAfter(element) {
     this.showIndicator();
 
-    this.position.top = element.offsetTop;
-    this.position.left = element.offsetLeft + element.offsetWidth;
+    const {
+      top, left, width, height,
+    } = element.getBoundingClientRect();
+
+    this.position.top = top;
+    this.position.left = left + width;
 
     this.size.width = this.barSize;
-    this.size.height = element.offsetHeight;
+    this.size.height = height;
   }
 
   pointInside(element) {
@@ -65,11 +71,14 @@ class Indicator {
     }
 
     const padding = getPadding(element);
+    const {
+      top, left, width, height,
+    } = element.getBoundingClientRect();
 
-    this.position.top = element.offsetTop + element.offsetHeight - padding.paddingBottom;
-    this.position.left = element.offsetLeft + padding.paddingLeft;
+    this.position.top = top + height - padding.paddingBottom;
+    this.position.left = left + padding.paddingLeft;
 
-    this.size.width = element.offsetWidth - padding.paddingLeft - padding.paddingRight;
+    this.size.width = width - padding.paddingLeft - padding.paddingRight;
     this.size.height = this.barSize;
   }
 }

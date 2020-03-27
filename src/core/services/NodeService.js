@@ -7,6 +7,10 @@ class NodeService {
     return this.vm.$el;
   }
 
+  getElementBoundingClientRect() {
+    return this.vm.$el.getBoundingClientRect();
+  }
+
   getEditor() {
     return this.vm.editor;
   }
@@ -16,9 +20,9 @@ class NodeService {
   }
 
   onLeftHelf({ clientX }) {
-    const { offsetLeft, offsetWidth } = this.getElement();
+    const { left, width } = this.getElementBoundingClientRect();
 
-    if (clientX < (offsetLeft + (offsetWidth / 2))) {
+    if (clientX < (left + (width / 2))) {
       return true;
     }
 
@@ -27,17 +31,17 @@ class NodeService {
 
   onEdge({ clientX, clientY }, edgeThickness = 8) {
     const {
-      offsetTop, offsetLeft, offsetWidth, offsetHeight,
-    } = this.getElement();
+      top, left, width, height,
+    } = this.getElementBoundingClientRect();
 
     const { scrollTop } = document.querySelector('html');
-    const clientTop = offsetTop - scrollTop;
+    const clientTop = top - scrollTop;
 
     if (
-      clientX < (offsetLeft + offsetWidth - edgeThickness)
-      && clientX > (offsetLeft + edgeThickness)
+      clientX < (left + width - edgeThickness)
+      && clientX > (left + edgeThickness)
       && clientY > (clientTop + edgeThickness)
-      && clientY < (clientTop + offsetHeight - edgeThickness)
+      && clientY < (clientTop + height - edgeThickness)
     ) {
       return false;
     }
