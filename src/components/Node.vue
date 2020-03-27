@@ -3,7 +3,7 @@
     :is="editor.findResolver(node.componentName)"
     v-bind="node.props"
     :class="{ 'cf-node-selected': isSelected }"
-    :draggable="node.isDraggable()"
+    :draggable="isDraggable"
     @dragstart.native="handleDragStart"
     @dragover.native="handleDragOver"
     @drop.native="handleDrop"
@@ -38,6 +38,9 @@ export default {
     isSelected() {
       return this.node === this.editor.selectedNode;
     },
+    isDraggable() {
+      return this.editor.enabled && this.node.isDraggable();
+    },
   },
   provide() {
     return {
@@ -51,6 +54,12 @@ export default {
     },
     handleDragStart(event) {
       event.stopPropagation();
+
+      if (!this.editor.enabled) {
+        // it is used to cancel dragging
+        event.preventDefault();
+        return;
+      }
 
       this.editor.dragNode(this.node);
     },
@@ -78,6 +87,10 @@ export default {
     },
     selectNode(event) {
       event.stopPropagation();
+
+      if (!this.editor.enabled) {
+        return;
+      }
 
       this.editor.selectNode(this.node);
     },
