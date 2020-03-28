@@ -1,5 +1,6 @@
 import kebabCase from 'lodash/kebabCase';
 import Indicator from './Indicator';
+import Node from './Node';
 
 class Editor {
   constructor(nodes = [], resolverMap = {}) {
@@ -63,6 +64,32 @@ class Editor {
 
     if (node === this.selectedNode) {
       this.selectNode(null);
+    }
+  }
+
+  getCraftConfig(node) {
+    let resolver;
+    if (node.componentName === 'Canvas') {
+      resolver = this.findResolver(node.props.component);
+    } else {
+      resolver = this.findResolver(node.componentName);
+    }
+
+    return resolver.craft || {};
+  }
+
+  export() {
+    const nodesData = this.nodes.map((node) => node.serialize());
+
+    return JSON.stringify(nodesData);
+  }
+
+  import(plainNodesData) {
+    try {
+      const nodesData = JSON.parse(plainNodesData);
+      this.nodes = nodesData.map((data) => Node.unserialize(this, data));
+    } catch {
+      throw new Error('The input is not valid.');
     }
   }
 }

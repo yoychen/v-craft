@@ -27,10 +27,11 @@ export default {
     if (!this.editor) {
       throw new Error('<Frame/> must be wrapped with <Editor/>.');
     }
-  },
-  mounted() {
-    const nodes = this.createNodesFromSlots();
-    this.editor.setTopLevelNodes(this.editor.nodes.concat(nodes));
+
+    if (this.editor.nodes.length === 0) {
+      const nodes = this.createNodesFromSlots();
+      this.editor.setTopLevelNodes(nodes);
+    }
   },
   methods: {
     createNodesFromSlots() {

@@ -1,5 +1,5 @@
-import { createNode, createSecondLevelNode } from '../helpers';
-
+import Node from '@/core/Node';
+import { createNode, createSecondLevelNode, createEditor } from '../helpers';
 
 describe('setProps', () => {
   it('updates its props', () => {
@@ -371,5 +371,65 @@ describe('insertAfter', () => {
     node.canBeSibling = () => false;
 
     expect(() => node.insertAfter(targetNode)).toThrow();
+  });
+});
+
+describe('serialize', () => {
+  it('serializes itself to plain object', () => {
+    const expectedData = {
+      componentName: 'Counter',
+      props: { amount: 1 },
+      children: [],
+      uuid: '123',
+      addition: { additionalConfigKey: 'additionalConfigValue' },
+    };
+
+    const node = createNode();
+    Object.assign(node, expectedData);
+
+    const data = node.serialize();
+
+    expect(data).toStrictEqual(expectedData);
+  });
+});
+
+describe('unserialize', () => {
+  const createNodeData = () => ({
+    componentName: 'Counter',
+    props: { amount: 1 },
+    children: [],
+    uuid: '123',
+    addition: { additionalConfigKey: 'additionalConfigValue' },
+  });
+
+  it('unserializes inputed plain object to Node', () => {
+    const nodeData = createNodeData();
+
+    const editor = createEditor();
+    editor.getCraftConfig = () => ({});
+    const parent = createNode();
+
+    const node = Node.unserialize(editor, nodeData, parent);
+
+    expect(node).toMatchObject(nodeData);
+    expect(node.parent).toEqual(parent);
+  });
+
+  it('extracts rules from craft config and assigns into Node', () => {
+    const nodeData = createNodeData();
+
+    const editor = createEditor();
+    const rules = {
+      canDrag: () => {},
+      canMoveIn: () => {},
+      canMoveOut: () => {},
+    };
+    editor.getCraftConfig = () => ({
+      rules,
+    });
+
+    const node = Node.unserialize(editor, nodeData);
+
+    expect(node.rules).toEqual(rules);
   });
 });

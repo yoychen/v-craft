@@ -159,6 +159,32 @@ class Node {
     parentOfTargetNode.children.splice(indexOfTargetNode + 1, 0, this);
     this.parent = parentOfTargetNode;
   }
+
+  serialize() {
+    return {
+      componentName: this.componentName,
+      props: this.props,
+      children: this.children.map((node) => node.serialize()),
+      addition: this.addition,
+      uuid: this.uuid,
+    };
+  }
 }
+
+Node.unserialize = (editor, nodeData, parent = null) => {
+  const node = new Node();
+  Object.assign(node, nodeData);
+
+  const craftConfig = editor.getCraftConfig(node);
+
+  if (craftConfig.rules) {
+    node.rules = craftConfig.rules;
+  }
+
+  node.parent = parent;
+  node.children = nodeData.children.map((data) => Node.unserialize(editor, data, node));
+
+  return node;
+};
 
 export default Node;

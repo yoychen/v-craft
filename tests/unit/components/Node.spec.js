@@ -31,13 +31,15 @@ describe('view', () => {
 });
 
 describe('handling drag', () => {
-  it('sets draggable attribute of the root element to true when the node is draggable', () => {
+  it('sets draggable attribute of the root element to true when the node is draggable and the editor is enabled', () => {
     const node = createNode();
+    const editor = createFakeEditor();
+    editor.enabled = true;
     node.isDraggable = () => true;
 
     const wrapper = shallowMountNode({
       node,
-    });
+    }, { editor });
 
     expect(wrapper.element.draggable).toBe(true);
   });

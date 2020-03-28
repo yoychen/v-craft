@@ -1,3 +1,4 @@
+import Node from '@/core/Node';
 import {
   createNode, createSecondLevelNode, createEditor, createNodeMap,
 } from '../helpers';
@@ -101,5 +102,36 @@ describe('removeNode', () => {
     editor.removeNode(node);
 
     expect(editor.selectedNode).toEqual(null);
+  });
+});
+
+describe('export', () => {
+  it('serializes and stringifies nodes attribute to JSON', () => {
+    const editor = createEditor();
+    const node = createNode();
+
+    const fakeNodeData = { key: 'value' };
+    node.serialize = () => fakeNodeData;
+    editor.nodes = [node];
+
+    const exportData = editor.export();
+
+    expect(exportData).toEqual(JSON.stringify([fakeNodeData]));
+  });
+});
+
+describe('import', () => {
+  it('parses and unserializes JSON to nodes attribute', () => {
+    const editor = createEditor();
+    const node = createNode();
+
+    const fakeNodeData = { key: 'value' };
+    const { unserialize } = Node;
+    Node.unserialize = () => node;
+
+    editor.import(JSON.stringify([fakeNodeData]));
+
+    expect(editor.nodes).toEqual([node]);
+    Node.unserialize = unserialize;
   });
 });
