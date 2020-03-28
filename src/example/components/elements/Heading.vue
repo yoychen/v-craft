@@ -44,13 +44,11 @@ export default {
         },
       },
     },
-    addition: {
-      settingComponents: {
-        Properties: HeadingSetting,
-        Typography,
-        Margin,
-        Padding,
-      },
+    settingComponents: {
+      Properties: HeadingSetting,
+      Typography,
+      Margin,
+      Padding,
     },
   },
 };

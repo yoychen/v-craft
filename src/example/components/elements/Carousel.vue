@@ -61,12 +61,10 @@ export default {
         },
       },
     },
-    addition: {
-      settingComponents: {
-        Properties: CarouselSetting,
-        Margin,
-        Decoration,
-      },
+    settingComponents: {
+      Properties: CarouselSetting,
+      Margin,
+      Decoration,
     },
   },
 };

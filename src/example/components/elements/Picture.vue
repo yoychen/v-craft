@@ -35,12 +35,10 @@ export default {
         },
       },
     },
-    addition: {
-      settingComponents: {
-        Properties: PictureSetting,
-        Margin,
-        Decoration,
-      },
+    settingComponents: {
+      Properties: PictureSetting,
+      Margin,
+      Decoration,
     },
   },
 };

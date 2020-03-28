@@ -41,13 +41,11 @@ export default {
         },
       },
     },
-    addition: {
-      settingComponents: {
-        Properties: ParagraphSetting,
-        Typography,
-        Margin,
-        Padding,
-      },
+    settingComponents: {
+      Properties: ParagraphSetting,
+      Typography,
+      Margin,
+      Padding,
     },
   },
 };

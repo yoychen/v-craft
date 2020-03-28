@@ -47,15 +47,13 @@ export default {
         'background-attachment': 'scroll',
       },
     },
-    addition: {
-      settingComponents: {
-        Dimensions,
-        Alignment,
-        Margin,
-        Padding,
-        Decoration,
-        Background,
-      },
+    settingComponents: {
+      Dimensions,
+      Alignment,
+      Margin,
+      Padding,
+      Decoration,
+      Background,
     },
   },
 };

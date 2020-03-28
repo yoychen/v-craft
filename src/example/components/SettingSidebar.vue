@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar" :class="{ disable: !this.editor.enabled }">
     <div class="content" :class="{ 'has-actions': showActions }">
-      <el-collapse>
+      <el-collapse v-if="settingComponents">
         <el-collapse-item
           v-for="(component, name) in settingComponents"
           :key="name"
@@ -50,9 +50,12 @@ export default {
       return this.selectedNode && this.selectedNode.props;
     },
     settingComponents() {
-      return this.selectedNode
-        ? this.selectedNode.addition.settingComponents
-        : {};
+      if (!this.selectedNode) {
+        return null;
+      }
+
+      const craftConfig = this.editor.getCraftConfig(this.selectedNode);
+      return craftConfig.settingComponents;
     },
     showActions() {
       return this.selectedNode && this.selectedNode.parent;
