@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Editor component='div' :resolverMap="resolverMap" >
+    <Editor component='div' :resolverMap="resolverMap" :import="demoData" >
       <Navbar />
       <ElementSidebar />
       <Preview />
@@ -21,6 +21,7 @@ import Paragraph from './components/elements/Paragraph.vue';
 import Heading from './components/elements/Heading.vue';
 import Picture from './components/elements/Picture.vue';
 import Carousel from './components/elements/Carousel.vue';
+import demoData from './demoData';
 
 export default {
   name: 'App',
@@ -32,6 +33,7 @@ export default {
       resolverMap: {
         Canvas, Container, Paragraph, Heading, Picture, Carousel,
       },
+      demoData,
     };
   },
 };
