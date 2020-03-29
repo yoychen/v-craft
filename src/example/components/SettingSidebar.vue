@@ -15,6 +15,12 @@
           />
         </el-collapse-item>
       </el-collapse>
+      <div v-else class="empty-view">
+        <i class="el-icon-edit"></i>
+        <span class="description">
+          Click on a element in preview panel to start editing.
+        </span>
+      </div>
     </div>
 
     <div v-if="showActions" class="actions">
@@ -127,6 +133,21 @@ $actions-height: 50px;
     & + button {
       margin-left: 6px;
     }
+  }
+}
+
+.empty-view {
+  margin-top: 5em;
+  text-align: center;
+  color: $color-gray;
+  i {
+    font-size: 24px;
+  }
+  .description {
+    display: block;
+    margin-top: 0.8em;
+    font-size: 14px;
+    line-height: 1.5;
   }
 }
 </style>
