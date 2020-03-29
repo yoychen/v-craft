@@ -69,7 +69,7 @@ class Editor {
 
   getCraftConfig(node) {
     let resolver;
-    if (node.componentName === 'Canvas') {
+    if (node.isCanvas()) {
       resolver = this.findResolver(node.props.component);
     } else {
       resolver = this.findResolver(node.componentName);
