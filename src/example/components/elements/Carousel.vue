@@ -10,8 +10,16 @@
       :style="{ 'background-image': `url('${slide.background}')` }"
     >
       <div class="content">
-        <h3 class="title">{{ slide.title }}</h3>
-        <h4 class="subtitle">{{ slide.subtitle }}</h4>
+        <Editor
+          tag="h3"
+          class="title"
+          v-model="slide.title"
+          ></Editor>
+        <Editor
+          tag="h4"
+          class="subtitle"
+          v-model="slide.subtitle"
+          ></Editor>
       </div>
     </el-carousel-item>
   </el-carousel>
@@ -21,10 +29,12 @@
 import CarouselSetting from './CarouselSetting.vue';
 import Margin from './styleSettings/Margin.vue';
 import Decoration from './styleSettings/Decoration.vue';
+import Editor from './utils/Editor.vue';
 import elementStyleMixin from './elementStyleMixin';
 
 export default {
   mixins: [elementStyleMixin],
+  components: { Editor },
   props: {
     height: Number,
     interval: Number,

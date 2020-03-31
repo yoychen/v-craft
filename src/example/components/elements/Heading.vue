@@ -1,9 +1,11 @@
 <template>
-  <component
-    :is="headingType"
+  <Editor
+    :tag="headingType"
     class="heading"
     :style="elementCSS"
-  >{{ content }}</component>
+    :value="content"
+    @input="updateContent"
+    ></Editor>
 </template>
 
 <script>
@@ -11,13 +13,23 @@ import HeadingSetting from './HeadingSetting.vue';
 import Typography from './styleSettings/Typography.vue';
 import Margin from './styleSettings/Margin.vue';
 import Padding from './styleSettings/Padding.vue';
+import Editor from './utils/Editor.vue';
 import elementStyleMixin from './elementStyleMixin';
 
 export default {
   mixins: [elementStyleMixin],
+  components: { Editor },
   props: {
     headingType: String,
     content: String,
+  },
+  inject: [
+    'node',
+  ],
+  methods: {
+    updateContent(content) {
+      this.node.setProps({ content });
+    },
   },
   craft: {
     defaultProps: {

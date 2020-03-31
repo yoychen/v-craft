@@ -1,20 +1,32 @@
 <template>
-  <p
+  <Editor
+    tag="p"
     :style="elementCSS"
-  >{{ content }}</p>
+    :value="content"
+    @input="updateContent"
+  ></Editor>
 </template>
 
 <script>
-import ParagraphSetting from './ParagraphSetting.vue';
 import Typography from './styleSettings/Typography.vue';
 import Margin from './styleSettings/Margin.vue';
 import Padding from './styleSettings/Padding.vue';
+import Editor from './utils/Editor.vue';
 import elementStyleMixin from './elementStyleMixin';
 
 export default {
   mixins: [elementStyleMixin],
+  components: { Editor },
   props: {
     content: String,
+  },
+  inject: [
+    'node',
+  ],
+  methods: {
+    updateContent(content) {
+      this.node.setProps({ content });
+    },
   },
   craft: {
     defaultProps: {
@@ -42,7 +54,6 @@ export default {
       },
     },
     settingComponents: {
-      Properties: ParagraphSetting,
       Typography,
       Margin,
       Padding,

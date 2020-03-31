@@ -15,14 +15,6 @@
       :key="index"
       shadow="never"
     >
-      <el-form-item label="Title">
-        <el-input v-model="slide.title" />
-      </el-form-item>
-
-      <el-form-item label="Subtitle">
-        <el-input v-model="slide.subtitle" />
-      </el-form-item>
-
       <el-form-item label="Background">
         <el-input v-model="slide.background" />
       </el-form-item>
