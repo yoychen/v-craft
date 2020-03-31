@@ -114,6 +114,8 @@ $actions-height: 50px;
   padding: 5px 20px;
   overflow: auto;
 
+  @include scrollbar();
+
   &.has-actions {
     bottom: $actions-height;
   }
@@ -128,6 +130,7 @@ $actions-height: 50px;
   line-height: $actions-height;
   padding: 0 0.8em;
   border-top: 1px solid #eee;
+  background-color: white;
   button {
     padding: 7px;
     & + button {

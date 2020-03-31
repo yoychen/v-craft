@@ -91,5 +91,7 @@ export default {
   &.disable {
     transform: translateX(-100%);
   }
+
+  @include scrollbar();
 }
 </style>
