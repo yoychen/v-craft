@@ -1,0 +1,22 @@
+$color-black: #171717;
+$color-gray: rgb(106, 106, 106);
+$color-light-gray: rgb(188, 201, 204);
+
+$navbar-height: 55px;
+$element-sidebar-width: 60px;
+$setting-sidebar-width: 280px;
+
+@mixin scrollbar($width: 13px) {
+  &::-webkit-scrollbar
+  {
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-thumb
+  {
+    border: 4px solid transparent;
+    border-radius: 8px;
+    background-clip: padding-box;
+    background-color: $color-light-gray;
+  }
+}

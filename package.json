@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "element-ui": "^2.13.0",
     "lodash": "^4.17.15",
     "sinon": "^9.0.1",
     "uuid": "^7.0.2",
