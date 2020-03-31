@@ -9,9 +9,6 @@
         <el-radio-button label="h3"></el-radio-button>
       </el-radio-group>
     </el-form-item>
-    <el-form-item label="Content">
-      <el-input :value="elementProps.content" @input="updateContent" />
-    </el-form-item>
   </el-form>
 </template>
 
