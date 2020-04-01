@@ -19,7 +19,7 @@ class NodeService {
     return this.vm.node;
   }
 
-  onLeftHelf({ clientX }) {
+  onLeftHalf({ clientX }) {
     const { left, width } = this.getElementBoundingClientRect();
 
     if (clientX < (left + (width / 2))) {
@@ -29,7 +29,7 @@ class NodeService {
     return false;
   }
 
-  onTopHelf({ clientY }) {
+  onTopHalf({ clientY }) {
     const { top, height } = this.getElementBoundingClientRect();
 
     if (clientY < (top + (height / 2))) {
@@ -64,7 +64,7 @@ class NodeService {
 
     editor.indicator.setIsForbidden(!editor.draggedNode.canBeSibling(this.getCurrentNode()));
 
-    if (this.onLeftHelf(cursor)) {
+    if (this.onLeftHalf(cursor)) {
       editor.indicator.pointBefore(this.getElement());
     } else {
       editor.indicator.pointAfter(this.getElement());
@@ -81,7 +81,7 @@ class NodeService {
     }
 
     editor.indicator.setIsForbidden(!this.getCurrentNode().isDroppable(editor.draggedNode));
-    if (this.onTopHelf(cursor)) {
+    if (this.onTopHalf(cursor)) {
       editor.indicator.pointInsideTop(this.getElement());
     } else {
       editor.indicator.pointInside(this.getElement());
@@ -104,7 +104,7 @@ class NodeService {
       return;
     }
 
-    if (this.onLeftHelf(cursor)) {
+    if (this.onLeftHalf(cursor)) {
       draggedNode.insertBefore(currentNode);
     } else {
       draggedNode.insertAfter(currentNode);
@@ -124,7 +124,7 @@ class NodeService {
       return;
     }
 
-    if (this.onTopHelf(cursor)) {
+    if (this.onTopHalf(cursor)) {
       currentNode.prepend(draggedNode);
     } else {
       currentNode.append(draggedNode);

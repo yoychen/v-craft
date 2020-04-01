@@ -32,43 +32,43 @@ function createCursor(x, y) {
   };
 }
 
-describe('onLeftHelf', () => {
+describe('onLeftHalf', () => {
   it('returns true when the cursor is on the left hand of element', () => {
     const nodeService = createNodeService();
     const cursor = createCursor(250, 300);
 
-    const onLeftHelf = nodeService.onLeftHelf(cursor);
+    const onLeftHalf = nodeService.onLeftHalf(cursor);
 
-    expect(onLeftHelf).toBe(true);
+    expect(onLeftHalf).toBe(true);
   });
 
   it('returns false when the cursor is not on the left hand of element', () => {
     const nodeService = createNodeService();
     const cursor = createCursor(301, 300);
 
-    const onLeftHelf = nodeService.onLeftHelf(cursor);
+    const onLeftHalf = nodeService.onLeftHalf(cursor);
 
-    expect(onLeftHelf).toBe(false);
+    expect(onLeftHalf).toBe(false);
   });
 });
 
-describe('onTopHelf', () => {
+describe('onTopHalf', () => {
   it('returns true when the cursor is on the top half of element', () => {
     const nodeService = createNodeService();
     const cursor = createCursor(300, 250);
 
-    const onTopHelf = nodeService.onTopHelf(cursor);
+    const onTopHalf = nodeService.onTopHalf(cursor);
 
-    expect(onTopHelf).toBe(true);
+    expect(onTopHalf).toBe(true);
   });
 
   it('returns false when the cursor is not on the top half of element', () => {
     const nodeService = createNodeService();
     const cursor = createCursor(300, 301);
 
-    const onTopHelf = nodeService.onTopHelf(cursor);
+    const onTopHalf = nodeService.onTopHalf(cursor);
 
-    expect(onTopHelf).toBe(false);
+    expect(onTopHalf).toBe(false);
   });
 });
 
@@ -107,7 +107,7 @@ describe('handleCanvasDragOver', () => {
   it('calls pointInside() when the cursor is not on the edge of element and not on the top half of element', () => {
     const nodeService = createNodeService();
     nodeService.onEdge = () => false;
-    nodeService.onTopHelf = () => false;
+    nodeService.onTopHalf = () => false;
     nodeService.getEditor().indicator.pointInside = jest.fn();
     const cursor = createCursor(210, 210);
 
@@ -119,7 +119,7 @@ describe('handleCanvasDragOver', () => {
   it('calls pointInsideTop() when the cursor is not on the edge of element and on the top half of element', () => {
     const nodeService = createNodeService();
     nodeService.onEdge = () => false;
-    nodeService.onTopHelf = () => true;
+    nodeService.onTopHalf = () => true;
     nodeService.getEditor().indicator.pointInsideTop = jest.fn();
     const cursor = createCursor(210, 210);
 
@@ -132,7 +132,7 @@ describe('handleCanvasDragOver', () => {
 describe('handleElementDragOver', () => {
   it('calls pointBefore() when the cursor is on the left hand of element', () => {
     const nodeService = createNodeService();
-    nodeService.onLeftHelf = () => true;
+    nodeService.onLeftHalf = () => true;
     nodeService.getEditor().indicator.pointBefore = jest.fn();
     const cursor = createCursor(210, 210);
 
@@ -143,7 +143,7 @@ describe('handleElementDragOver', () => {
 
   it('calls pointAfter() when the cursor is not on the left hand of element', () => {
     const nodeService = createNodeService();
-    nodeService.onLeftHelf = () => false;
+    nodeService.onLeftHalf = () => false;
     nodeService.getEditor().indicator.pointAfter = jest.fn();
     const cursor = createCursor(210, 210);
 
@@ -156,7 +156,7 @@ describe('handleElementDragOver', () => {
 describe('handleElementDrop', () => {
   it('calls insertBefore() when the cursor is on the left hand of element and the target node is allow to be inserted', () => {
     const nodeService = createNodeService();
-    nodeService.onLeftHelf = () => true;
+    nodeService.onLeftHalf = () => true;
     nodeService.getEditor().draggedNode.canBeSibling = () => true;
     nodeService.getEditor().draggedNode.insertBefore = jest.fn();
     const cursor = createCursor(210, 210);
@@ -168,7 +168,7 @@ describe('handleElementDrop', () => {
 
   it('does not call insertBefore() when the cursor is on the left hand of element and the target node is not allow to be inserted', () => {
     const nodeService = createNodeService();
-    nodeService.onLeftHelf = () => true;
+    nodeService.onLeftHalf = () => true;
     nodeService.getEditor().draggedNode.canBeSibling = () => false;
     nodeService.getEditor().draggedNode.insertBefore = jest.fn();
     const cursor = createCursor(210, 210);
@@ -180,7 +180,7 @@ describe('handleElementDrop', () => {
 
   it('calls insertAfter() when the cursor is not on the left hand of element and the target node is allow to be inserted', () => {
     const nodeService = createNodeService();
-    nodeService.onLeftHelf = () => false;
+    nodeService.onLeftHalf = () => false;
     nodeService.getEditor().draggedNode.canBeSibling = () => true;
     nodeService.getEditor().draggedNode.insertAfter = jest.fn();
     const cursor = createCursor(210, 210);
@@ -192,7 +192,7 @@ describe('handleElementDrop', () => {
 
   it('does not call insertAfter() when the cursor is not on the left hand of element and the target node is not allow to be inserted', () => {
     const nodeService = createNodeService();
-    nodeService.onLeftHelf = () => false;
+    nodeService.onLeftHalf = () => false;
     nodeService.getEditor().draggedNode.canBeSibling = () => false;
     nodeService.getEditor().draggedNode.insertAfter = jest.fn();
     const cursor = createCursor(210, 210);
@@ -207,7 +207,7 @@ describe('handleCanvasDrop', () => {
   it('calls append() when the cursor is not on the edge of element and not on the top half of element and the current node is droppable', () => {
     const nodeService = createNodeService();
     nodeService.onEdge = () => false;
-    nodeService.onTopHelf = () => false;
+    nodeService.onTopHalf = () => false;
     nodeService.getCurrentNode().isDroppable = () => true;
     nodeService.getCurrentNode().append = jest.fn();
     const cursor = createCursor(210, 210);
@@ -220,7 +220,7 @@ describe('handleCanvasDrop', () => {
   it('calls prepend() when the cursor is not on the edge of element and on the top half of element and the current node is droppable', () => {
     const nodeService = createNodeService();
     nodeService.onEdge = () => false;
-    nodeService.onTopHelf = () => true;
+    nodeService.onTopHalf = () => true;
     nodeService.getCurrentNode().isDroppable = () => true;
     nodeService.getCurrentNode().prepend = jest.fn();
     const cursor = createCursor(210, 210);
