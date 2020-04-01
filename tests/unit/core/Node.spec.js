@@ -273,6 +273,47 @@ describe('append', () => {
   });
 });
 
+describe('prepend', () => {
+  it('prepends the incomming node into its children when it is droppable', () => {
+    const node = createNode();
+    node.children = [createNode(), createNode()];
+    const incommingNode = createNode();
+
+    node.isDroppable = () => true;
+
+    node.prepend(incommingNode);
+
+    expect(node.children.length).toEqual(3);
+    expect(node.children[0]).toEqual(incommingNode);
+    expect(incommingNode.parent).toEqual(node);
+  });
+
+  it('calls makeOrphan() of the incomming node when prepends the incomming node into its children', () => {
+    const node = createNode();
+    const incommingNode = createNode();
+
+    node.isDroppable = () => true;
+
+    incommingNode.makeOrphan = jest.fn();
+
+    node.prepend(incommingNode);
+
+    expect(incommingNode.makeOrphan.mock.calls.length).toBe(1);
+  });
+
+  it('throws error when it is not droppable', () => {
+    const node = createNode();
+    const incommingNode = createNode();
+
+    node.isDroppable = () => false;
+
+    expect(() => node.prepend(incommingNode)).toThrow();
+
+    expect(node.children).not.toEqual(expect.arrayContaining([incommingNode]));
+    expect(incommingNode.parent).not.toEqual(node);
+  });
+});
+
 describe('canBeSibling', () => {
   it('returns false when the parent of the target node does not exist', () => {
     const node = createNode();

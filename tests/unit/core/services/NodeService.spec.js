@@ -52,6 +52,26 @@ describe('onLeftHelf', () => {
   });
 });
 
+describe('onTopHelf', () => {
+  it('returns true when the cursor is on the top half of element', () => {
+    const nodeService = createNodeService();
+    const cursor = createCursor(300, 250);
+
+    const onTopHelf = nodeService.onTopHelf(cursor);
+
+    expect(onTopHelf).toBe(true);
+  });
+
+  it('returns false when the cursor is not on the top half of element', () => {
+    const nodeService = createNodeService();
+    const cursor = createCursor(300, 301);
+
+    const onTopHelf = nodeService.onTopHelf(cursor);
+
+    expect(onTopHelf).toBe(false);
+  });
+});
+
 describe('onEdge', () => {
   it('returns true when the cursor is on the edge of element', () => {
     const nodeService = createNodeService();
@@ -84,15 +104,28 @@ describe('handleCanvasDragOver', () => {
     expect(nodeService.handleElementDragOver.mock.calls.length).toBe(1);
   });
 
-  it('calls pointInside() when the cursor is not on the edge of element', () => {
+  it('calls pointInside() when the cursor is not on the edge of element and not on the top half of element', () => {
     const nodeService = createNodeService();
     nodeService.onEdge = () => false;
+    nodeService.onTopHelf = () => false;
     nodeService.getEditor().indicator.pointInside = jest.fn();
     const cursor = createCursor(210, 210);
 
     nodeService.handleCanvasDragOver(cursor);
 
     expect(nodeService.getEditor().indicator.pointInside.mock.calls.length).toBe(1);
+  });
+
+  it('calls pointInsideTop() when the cursor is not on the edge of element and on the top half of element', () => {
+    const nodeService = createNodeService();
+    nodeService.onEdge = () => false;
+    nodeService.onTopHelf = () => true;
+    nodeService.getEditor().indicator.pointInsideTop = jest.fn();
+    const cursor = createCursor(210, 210);
+
+    nodeService.handleCanvasDragOver(cursor);
+
+    expect(nodeService.getEditor().indicator.pointInsideTop.mock.calls.length).toBe(1);
   });
 });
 
@@ -171,9 +204,10 @@ describe('handleElementDrop', () => {
 });
 
 describe('handleCanvasDrop', () => {
-  it('calls append() when the cursor is not on the edge of element and the current node is droppable', () => {
+  it('calls append() when the cursor is not on the edge of element and not on the top half of element and the current node is droppable', () => {
     const nodeService = createNodeService();
     nodeService.onEdge = () => false;
+    nodeService.onTopHelf = () => false;
     nodeService.getCurrentNode().isDroppable = () => true;
     nodeService.getCurrentNode().append = jest.fn();
     const cursor = createCursor(210, 210);
@@ -183,16 +217,31 @@ describe('handleCanvasDrop', () => {
     expect(nodeService.getCurrentNode().append.mock.calls.length).toBe(1);
   });
 
-  it('does not call append() when the cursor is not on the edge of element and the current node is not droppable', () => {
+  it('calls prepend() when the cursor is not on the edge of element and on the top half of element and the current node is droppable', () => {
+    const nodeService = createNodeService();
+    nodeService.onEdge = () => false;
+    nodeService.onTopHelf = () => true;
+    nodeService.getCurrentNode().isDroppable = () => true;
+    nodeService.getCurrentNode().prepend = jest.fn();
+    const cursor = createCursor(210, 210);
+
+    nodeService.handleCanvasDrop(cursor);
+
+    expect(nodeService.getCurrentNode().prepend.mock.calls.length).toBe(1);
+  });
+
+  it('does nothing when the cursor is not on the edge of element and the current node is not droppable', () => {
     const nodeService = createNodeService();
     nodeService.onEdge = () => false;
     nodeService.getCurrentNode().isDroppable = () => false;
     nodeService.getCurrentNode().append = jest.fn();
+    nodeService.getCurrentNode().prepend = jest.fn();
     const cursor = createCursor(210, 210);
 
     nodeService.handleCanvasDrop(cursor);
 
     expect(nodeService.getCurrentNode().append.mock.calls.length).toBe(0);
+    expect(nodeService.getCurrentNode().prepend.mock.calls.length).toBe(0);
   });
 
   it('calls handleElementDrop() when the cursor is on the edge of element', () => {

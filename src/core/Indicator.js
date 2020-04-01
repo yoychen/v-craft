@@ -1,3 +1,18 @@
+function getPadding(e) {
+  const {
+    paddingTop, paddingLeft, paddingRight, paddingBottom,
+  } = getComputedStyle(e);
+  const padding = {
+    paddingTop, paddingLeft, paddingRight, paddingBottom,
+  };
+
+  Object.keys(padding).forEach((key) => {
+    padding[key] = parseInt(padding[key].slice(0, -2), 10);
+  });
+
+  return padding;
+}
+
 class Indicator {
   constructor(barSize = 2) {
     this.barSize = barSize;
@@ -55,27 +70,27 @@ class Indicator {
   pointInside(element) {
     this.showIndicator();
 
-    function getPadding(e) {
-      const {
-        paddingTop, paddingLeft, paddingRight, paddingBottom,
-      } = getComputedStyle(e);
-      const padding = {
-        paddingTop, paddingLeft, paddingRight, paddingBottom,
-      };
-
-      Object.keys(padding).forEach((key) => {
-        padding[key] = parseInt(padding[key].slice(0, -2), 10);
-      });
-
-      return padding;
-    }
-
     const padding = getPadding(element);
     const {
       top, left, width, height,
     } = element.getBoundingClientRect();
 
     this.position.top = top + height - padding.paddingBottom;
+    this.position.left = left + padding.paddingLeft;
+
+    this.size.width = width - padding.paddingLeft - padding.paddingRight;
+    this.size.height = this.barSize;
+  }
+
+  pointInsideTop(element) {
+    this.showIndicator();
+
+    const padding = getPadding(element);
+    const {
+      top, left, width,
+    } = element.getBoundingClientRect();
+
+    this.position.top = top + padding.paddingTop;
     this.position.left = left + padding.paddingLeft;
 
     this.size.width = width - padding.paddingLeft - padding.paddingRight;

@@ -23,7 +23,7 @@ describe('setIsForbidden', () => {
   });
 });
 
-function createElementStub() {
+function createStubElement() {
   return {
     getBoundingClientRect: () => ({
       top: 50,
@@ -37,7 +37,7 @@ function createElementStub() {
 describe('pointBefore', () => {
   it('shows indicator on the left side of the element', () => {
     const indicator = createIndicator();
-    const element = createElementStub();
+    const element = createStubElement();
 
     indicator.pointBefore(element);
 
@@ -56,7 +56,7 @@ describe('pointBefore', () => {
 describe('pointAfter', () => {
   it('shows indicator on the right side of the element', () => {
     const indicator = createIndicator();
-    const element = createElementStub();
+    const element = createStubElement();
 
     indicator.pointAfter(element);
 
@@ -72,24 +72,47 @@ describe('pointAfter', () => {
   });
 });
 
+function stubGetComputedStyle(style) {
+  const defaultStyle = {
+    paddingTop: '2px',
+    paddingLeft: '20px',
+    paddingRight: '25px',
+    paddingBottom: '15px',
+  };
+  window.getComputedStyle = () => style || defaultStyle;
+}
+
 describe('pointInside', () => {
   it('shows indicator on the bottom of the content of the element', () => {
     const indicator = createIndicator();
-    const element = createElementStub();
-
-    const style = {
-      paddingTop: '2px',
-      paddingLeft: '20px',
-      paddingRight: '25px',
-      paddingBottom: '15px',
-    };
-    window.getComputedStyle = () => style;
+    const element = createStubElement();
+    stubGetComputedStyle();
 
     indicator.pointInside(element);
 
     expect(indicator.show).toBe(true);
     expect(indicator.position).toStrictEqual({
       top: 235, // element.offsetTop + element.offsetHeight - element.paddingBottom
+      left: 60, // element.offsetLeft + element.paddingLeft
+    });
+    expect(indicator.size).toStrictEqual({
+      width: 555, // element.offsetWidth - element.paddingLeft - element.paddingRight
+      height: 2,
+    });
+  });
+});
+
+describe('pointInsideTop', () => {
+  it('shows indicator on the top of the content of the element', () => {
+    const indicator = createIndicator();
+    const element = createStubElement();
+    stubGetComputedStyle();
+
+    indicator.pointInsideTop(element);
+
+    expect(indicator.show).toBe(true);
+    expect(indicator.position).toStrictEqual({
+      top: 52, // element.offsetTop + element.paddingTop
       left: 60, // element.offsetLeft + element.paddingLeft
     });
     expect(indicator.size).toStrictEqual({

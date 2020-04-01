@@ -122,6 +122,18 @@ class Node {
     incommingNode.parent = this;
   }
 
+  prepend(incommingNode) {
+    if (!this.isDroppable(incommingNode)) {
+      throw new Error(`${this.componentName} is not droppable with the incommingNode - ${incommingNode.componentName}.`);
+    }
+
+    incommingNode.makeOrphan();
+
+    this.children.splice(0, 0, incommingNode);
+    // eslint-disable-next-line no-param-reassign
+    incommingNode.parent = this;
+  }
+
   canBeSibling(targetNode) {
     if (targetNode === this) {
       return false;

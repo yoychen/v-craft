@@ -29,6 +29,16 @@ class NodeService {
     return false;
   }
 
+  onTopHelf({ clientY }) {
+    const { top, height } = this.getElementBoundingClientRect();
+
+    if (clientY < (top + (height / 2))) {
+      return true;
+    }
+
+    return false;
+  }
+
   onEdge({ clientX, clientY }, edgeThickness = 8) {
     const {
       top, left, width, height,
@@ -67,8 +77,13 @@ class NodeService {
 
     if (this.onEdge({ clientX, clientY })) {
       this.handleElementDragOver(cursor);
+      return;
+    }
+
+    editor.indicator.setIsForbidden(!this.getCurrentNode().isDroppable(editor.draggedNode));
+    if (this.onTopHelf(cursor)) {
+      editor.indicator.pointInsideTop(this.getElement());
     } else {
-      editor.indicator.setIsForbidden(!this.getCurrentNode().isDroppable(editor.draggedNode));
       editor.indicator.pointInside(this.getElement());
     }
   }
@@ -105,7 +120,13 @@ class NodeService {
       return;
     }
 
-    if (currentNode.isDroppable(draggedNode)) {
+    if (!currentNode.isDroppable(draggedNode)) {
+      return;
+    }
+
+    if (this.onTopHelf(cursor)) {
+      currentNode.prepend(draggedNode);
+    } else {
       currentNode.append(draggedNode);
     }
   }
