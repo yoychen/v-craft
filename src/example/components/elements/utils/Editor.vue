@@ -34,14 +34,14 @@ export default {
     For further details, please see the following link.
     https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_content#Differences_in_markup_generation
     */
-    this.$refs.editor.innerText = this.value;
+    this.updateDOMContent();
+  },
+  updated() {
+    this.updateDOMContent();
   },
   watch: {
     value() {
-      // To avoid that cursor jumps to start on typing.
-      if (this.value !== this.$refs.editor.innerText) {
-        this.$refs.editor.innerText = this.value;
-      }
+      this.updateDOMContent();
     },
   },
   computed: {
@@ -55,6 +55,12 @@ export default {
     },
   },
   methods: {
+    updateDOMContent() {
+      // To avoid that cursor jumps to start on typing.
+      if (this.value !== this.$refs.editor.innerText) {
+        this.$refs.editor.innerText = this.value;
+      }
+    },
     setEditable(bool) {
       this.editable = bool;
     },
