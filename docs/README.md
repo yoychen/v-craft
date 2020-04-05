@@ -2,7 +2,7 @@
 home: true
 heroImage: null
 heroText: V-Craft
-tagline: A Toolset for Building Extensible Page Builders with Vue.js
+tagline: A Toolset for Building Extensible Page Builders with Vue.js (inspired by Craft.js)
 actionText: Get Started →
 actionLink: /guide/
 features:

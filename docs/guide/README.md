@@ -1,6 +1,6 @@
 # Introduction
 
-V-Craft is a toolset for building extensible page builders with Vue.js. Instead of a complete page builder with a user interface and designed element blocks out of the box, V-Craft only provides the essentials of the page builder. With V-Craft, you will able to focus on the specifications and use cases of your page builder project, and build your page builder perfectly fit on your needs.
+V-Craft (inspired by [Craft.js](https://craft.js.org/)) is a toolset for building extensible page builders with Vue.js. Instead of a complete page builder with a user interface and designed element blocks out of the box, V-Craft only provides the essentials of the page builder. With V-Craft, you will able to focus on the specifications and use cases of your page builder project, and build your page builder perfectly fit on your needs.
 
 ## Features
 

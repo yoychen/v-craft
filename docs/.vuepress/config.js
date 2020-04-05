@@ -1,4 +1,5 @@
 module.exports = {
+  base: '/v-craft/docs/',
   title: 'V-Craft',
   themeConfig: {
     sidebarDepth: 2,
