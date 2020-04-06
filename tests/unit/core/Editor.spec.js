@@ -135,3 +135,31 @@ describe('import', () => {
     Node.unserialize = unserialize;
   });
 });
+
+describe('getSettings', () => {
+  it('returns the setting components of the inputed node', () => {
+    const editor = createEditor();
+    const node = createNode();
+
+    const craftConfig = {
+      settings: [],
+    };
+    editor.getCraftConfig = () => craftConfig;
+
+    const settings = editor.getSettings(node);
+
+    expect(settings).toEqual(craftConfig.settings);
+  });
+
+  it('returns empty object when the inputed node does not have setting components', () => {
+    const editor = createEditor();
+    const node = createNode();
+
+    const craftConfig = {};
+    editor.getCraftConfig = () => craftConfig;
+
+    const settings = editor.getSettings(node);
+
+    expect(settings).toBeInstanceOf(Object);
+  });
+});

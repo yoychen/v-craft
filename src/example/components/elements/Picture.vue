@@ -35,7 +35,7 @@ export default {
         },
       },
     },
-    settingComponents: {
+    settings: {
       Properties: PictureSetting,
       Margin,
       Decoration,

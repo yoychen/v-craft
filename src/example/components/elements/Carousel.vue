@@ -71,7 +71,7 @@ export default {
         },
       },
     },
-    settingComponents: {
+    settings: {
       Properties: CarouselSetting,
       Margin,
       Decoration,

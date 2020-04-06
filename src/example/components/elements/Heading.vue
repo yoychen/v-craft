@@ -56,7 +56,7 @@ export default {
         },
       },
     },
-    settingComponents: {
+    settings: {
       Properties: HeadingSetting,
       Typography,
       Margin,

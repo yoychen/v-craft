@@ -78,6 +78,10 @@ class Editor {
     return resolver.craft || {};
   }
 
+  getSettings(node) {
+    return this.getCraftConfig(node).settings || {};
+  }
+
   export() {
     const nodesData = this.nodes.map((node) => node.serialize());
 

@@ -60,8 +60,7 @@ export default {
         return null;
       }
 
-      const craftConfig = this.editor.getCraftConfig(this.selectedNode);
-      return craftConfig.settingComponents;
+      return this.editor.getSettings(this.selectedNode);
     },
     showActions() {
       return this.selectedNode && this.selectedNode.parent;

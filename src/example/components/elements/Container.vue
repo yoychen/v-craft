@@ -47,7 +47,7 @@ export default {
         'background-attachment': 'scroll',
       },
     },
-    settingComponents: {
+    settings: {
       Dimensions,
       Alignment,
       Margin,

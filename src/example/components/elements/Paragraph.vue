@@ -53,7 +53,7 @@ export default {
         },
       },
     },
-    settingComponents: {
+    settings: {
       Typography,
       Margin,
       Padding,
