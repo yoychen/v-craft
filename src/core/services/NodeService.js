@@ -44,14 +44,11 @@ class NodeService {
       top, left, width, height,
     } = this.getElementBoundingClientRect();
 
-    const { scrollTop } = document.querySelector('html');
-    const clientTop = top - scrollTop;
-
     if (
       clientX < (left + width - edgeThickness)
       && clientX > (left + edgeThickness)
-      && clientY > (clientTop + edgeThickness)
-      && clientY < (clientTop + height - edgeThickness)
+      && clientY > (top + edgeThickness)
+      && clientY < (top + height - edgeThickness)
     ) {
       return false;
     }

@@ -28,13 +28,9 @@ function shallowMountIndicator(props) {
 
 describe('view', () => {
   it('renders .indicator whose style is computed from indicator prop', () => {
-    document.querySelector = () => ({
-      scrollTop: 15,
-    });
-
     const wrapper = shallowMountIndicator();
 
-    expect(wrapper.element.style.top).toBe('5px');
+    expect(wrapper.element.style.top).toBe('20px');
     expect(wrapper.element.style.left).toBe('15px');
     expect(wrapper.element.style.width).toBe('200px');
     expect(wrapper.element.style.height).toBe('300px');

@@ -19,10 +19,8 @@ export default {
       const { top, left } = this.indicator.position;
       const { width, height } = this.indicator.size;
 
-      const { scrollTop } = document.querySelector('html');
-
       const style = {
-        top: `${top - scrollTop}px`,
+        top: `${top}px`,
         left: `${left}px`,
         height: `${height}px`,
         width: `${width}px`,
