@@ -9,8 +9,7 @@
 </template>
 
 <script>
-import Frame from '@/components/Frame.vue';
-import Canvas from '@/components/Canvas.vue';
+import { Frame, Canvas } from '@';
 import Paper from './Paper.vue';
 
 export default {

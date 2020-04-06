@@ -10,8 +10,7 @@
 </template>
 
 <script>
-import Editor from '@/components/Editor.vue';
-import Canvas from '@/components/Canvas.vue';
+import { Editor, Canvas } from '@';
 import SettingSidebar from './components/SettingSidebar.vue';
 import ElementSidebar from './components/ElementSidebar.vue';
 import Navbar from './components/Navbar.vue';
