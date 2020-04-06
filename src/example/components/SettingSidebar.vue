@@ -10,8 +10,6 @@
         >
           <component
             :is="component"
-            :elementProps="elementProps"
-            :elementPropsSetter="elementPropsSetter"
           />
         </el-collapse-item>
       </el-collapse>
@@ -45,15 +43,6 @@ export default {
   computed: {
     selectedNode() {
       return this.editor.selectedNode;
-    },
-    elementPropsSetter() {
-      let setter = this.selectedNode && this.selectedNode.setProps;
-      setter = setter.bind(this.selectedNode);
-
-      return setter;
-    },
-    elementProps() {
-      return this.selectedNode && this.selectedNode.props;
     },
     settingComponents() {
       if (!this.selectedNode) {

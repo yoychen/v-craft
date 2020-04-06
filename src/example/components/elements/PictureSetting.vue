@@ -7,11 +7,10 @@
 </template>
 
 <script>
+import settingMixin from '@/components/settingMixin';
+
 export default {
-  props: {
-    elementProps: Object,
-    elementPropsSetter: Function,
-  },
+  mixins: [settingMixin],
   methods: {
     updateImageUrl(imageUrl) {
       this.elementPropsSetter({ imageUrl });

@@ -42,11 +42,10 @@
 </template>
 
 <script>
+import settingMixin from '@/components/settingMixin';
+
 export default {
-  props: {
-    elementProps: Object,
-    elementPropsSetter: Function,
-  },
+  mixins: [settingMixin],
   computed: {
     slides() {
       return this.elementProps.slides;

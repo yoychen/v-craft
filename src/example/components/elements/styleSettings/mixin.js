@@ -1,8 +1,7 @@
+import settingMixin from '@/components/settingMixin';
+
 export default {
-  props: {
-    elementProps: Object,
-    elementPropsSetter: Function,
-  },
+  mixins: [settingMixin],
   methods: {
     styleExist(name) {
       return this.elementProps.elementStyle[name] !== undefined;
