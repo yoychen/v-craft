@@ -1,18 +1,19 @@
 {
-  "name": "v-craft",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@v-craft/core",
+  "version": "0.1.0-alpha.1",
+  "main": "dist/v-craft.umd.min.js",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:lib": "vue-cli-service build --target lib --name v-craft src/index.js",
+    "publish:lib": "npm run build:lib && npm publish",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.6.4",
-    "element-ui": "^2.13.0",
     "lodash": "^4.17.15",
-    "sinon": "^9.0.1",
     "uuid": "^7.0.2",
     "vue": "^2.6.11"
   },
@@ -24,12 +25,14 @@
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/test-utils": "1.0.0-beta.31",
     "babel-eslint": "^10.0.3",
+    "element-ui": "^2.13.0",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-vue": "^6.1.2",
     "lint-staged": "^9.5.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
+    "sinon": "^9.0.1",
     "vue-template-compiler": "^2.6.11"
   },
   "gitHooks": {

@@ -43,8 +43,7 @@
 </template>
 
 <script>
-import Blueprint from '@/components/Blueprint.vue';
-import Canvas from '@/components/Canvas.vue';
+import { Blueprint, Canvas } from '@';
 import ElementBlock from './ElementBlock.vue';
 import Paragraph from './elements/Paragraph.vue';
 import Heading from './elements/Heading.vue';

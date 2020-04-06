@@ -1,4 +1,4 @@
-import settingMixin from '@/components/settingMixin';
+import { settingMixin } from '@';
 
 export default {
   mixins: [settingMixin],
