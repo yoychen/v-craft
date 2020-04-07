@@ -1,6 +1,6 @@
 {
   "name": "@v-craft/core",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.5",
   "main": "dist/v-craft.umd.min.js",
   "license": "MIT",
   "scripts": {
@@ -43,5 +43,6 @@
       "vue-cli-service lint",
       "git add"
     ]
-  }
+  },
+  "files": ["dist"]
 }
