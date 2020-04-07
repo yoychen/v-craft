@@ -11,15 +11,18 @@ module.exports = {
           '/guide/',
           '/guide/installation',
           '/guide/tutorial',
-        ]
+        ],
       },
-      // {
-      //   title: 'API Reference',
-      //   collapsable: false,
-      //   children: [
-      //     '/api/',
-      //   ]
-      // }
+      {
+        title: 'API Reference',
+        collapsable: false,
+        children: [
+          '/api/editor_component',
+          '/api/frame_component',
+          '/api/canvas_component',
+          '/api/blueprint_component',
+        ],
+      },
     ],
   },
   markdown: {
