@@ -357,6 +357,50 @@ export default {
 </script>
 ```
 
+## Retrieve and manipulate editor state
+
+We can get the editor's state from the injected value `editor.enabled`, and toggle it by using `editor.enable()` and `editor.disable()` methods. When the editor's state is disabled, all page elements in `<Frame />` can not be dragged and selected, nor can they be edited.
+
+```html{5-14,22-24,28-34}
+<!-- components/SettingPanel.vue -->
+
+<template>
+  <div class="setting-panel">
+    <div class="custom-control custom-switch">
+      <input
+        :checked="editor.enabled"
+        @change="toggleState"
+        type="checkbox"
+        class="custom-control-input"
+        id="editorState">
+      <label class="custom-control-label" for="editorState">Enable</label>
+    </div>
+    <hr />
+
+    ...
+  </div>
+</template>
+
+<script>
+export default {
+  inject: [
+    'editor',
+  ],
+  ...
+  methods: {
+    ...
+    toggleState() {
+      if (this.editor.enabled) {
+        this.editor.disable();
+      } else {
+        this.editor.enable();
+      }
+    },
+  },
+};
+</script>
+```
+
 ## Export / Import
 
 There is the last part of our page builder, we would like to save and restore the user's creation; we can do this by using the methods `editor.export()` and `editor.import()`.
@@ -430,3 +474,9 @@ export default {
 };
 </script>
 ```
+
+## Conclusion
+
+Until the end, We implement the most of functionalities of a page builder with V-Craft. you can see this example on [this link](https://github.com/yoychen/v-craft-tutor).
+
+With V-Craft, we won't need to build a drag-n-drop system ourselves, just need to focus on our specific need. Wrapping page elements is the same as writing any other Vue.js component, so we won't need to learn additional skills to do that. We sincerely hope it can help you.
