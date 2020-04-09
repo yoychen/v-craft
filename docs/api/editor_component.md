@@ -12,7 +12,7 @@ Specify the component or HTML tag to display.
 
 ### resolverMap
 
- * type: `Object<String, Object (component’s options object)>`
+ * type: `Object<string, Object (component’s options object)>`
 
 A map of page elements that will be used in the editor.
 
