@@ -53,6 +53,13 @@ jobs:
       with:
         name: demo-site
         path: dist
+    - name: Build docs
+      run: npm run docs:build
+    - name: Upload docs
+      uses: actions/upload-artifact@v1
+      with:
+        name: docs
+        path: docs/.vuepress/dist
 
   deploy:
     if: github.ref == 'refs/heads/master'
@@ -69,8 +76,13 @@ jobs:
       uses: actions/download-artifact@v1
       with:
         name: demo-site
+    - name: Download docs
+      uses: actions/download-artifact@v1
+      with:
+        name: docs
     - name: Deploy demo site
       run: |
+        mv docs $PUBLISH_DIR 
         cd $PUBLISH_DIR
         git init
         git config --local user.email $USER_EMAIL
