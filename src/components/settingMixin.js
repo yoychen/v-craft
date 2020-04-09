@@ -1,20 +1,18 @@
+import Node from '@/core/Node';
+
 export default {
-  inject: [
-    'editor',
-  ],
+  props: {
+    node: Node,
+  },
   computed: {
     elementPropsSetter() {
-      const { selectedNode } = this.editor;
-
-      let setter = selectedNode && selectedNode.setProps;
-      setter = setter.bind(selectedNode);
+      let setter = this.node.setProps;
+      setter = setter.bind(this.node);
 
       return setter;
     },
     elementProps() {
-      const { selectedNode } = this.editor;
-
-      return selectedNode && selectedNode.props;
+      return this.node.props;
     },
   },
 };

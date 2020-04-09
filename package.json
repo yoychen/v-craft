@@ -1,6 +1,6 @@
 {
   "name": "@v-craft/core",
-  "version": "0.1.0-alpha.5",
+  "version": "0.1.0-alpha.7",
   "main": "dist/v-craft.umd.min.js",
   "license": "MIT",
   "scripts": {

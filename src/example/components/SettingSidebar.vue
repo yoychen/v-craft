@@ -10,6 +10,7 @@
         >
           <component
             :is="component"
+            :node="selectedNode"
           />
         </el-collapse-item>
       </el-collapse>
