@@ -37,6 +37,8 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: [lint, test]
+    env:
+      VUE_APP_GA: ${{secrets.google_analytics_id}}
 
     steps:
     - uses: actions/checkout@v2

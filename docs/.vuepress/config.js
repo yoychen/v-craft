@@ -32,4 +32,12 @@ module.exports = {
   markdown: {
     lineNumbers: true,
   },
+  plugins: [
+    [
+      '@vuepress/google-analytics',
+      {
+        'ga': process.env.VUE_APP_GA,
+      },
+    ],
+  ],
 }
