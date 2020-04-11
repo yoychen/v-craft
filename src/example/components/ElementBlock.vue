@@ -20,6 +20,7 @@ $block-height: 50px;
 .element-block {
   height: $block-height;
   text-align: center;
+  cursor: pointer;
   .material-icons {
     font-size: 40px;
     line-height: $block-height;

@@ -2,8 +2,8 @@
   <nav class="navbar">
     <span class="brand">V-Craft</span>
     <div class="actions">
-      <a href="https://github.com/yoychen/v-craft">Github</a>
-      <a href="./docs">Documentation</a>
+      <a href="https://github.com/yoychen/v-craft"><i class="el-icon-star-off" /> Github</a>
+      <a href="./docs"><i class="el-icon-collection" /> Documentation</a>
       <a href="#" @click.prevent="toggleImportDialog">Import</a>
       <a href="#" @click.prevent="toggleExportDialog">Export</a>
       <el-switch
