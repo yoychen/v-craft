@@ -32,6 +32,8 @@ jobs:
       run: npm ci
     - name: Run unit test
       run: npm run test:unit
+    - name: Upload coverage
+      run: bash <(curl -s https://codecov.io/bash)
   
   build:
     if: github.ref == 'refs/heads/master'
