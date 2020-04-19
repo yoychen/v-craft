@@ -26,18 +26,26 @@ function shallowMountBlueprint(props, defaultSlot = [], blueprintSlot = ['<span>
       default: defaultSlot,
       blueprint: blueprintSlot,
     },
-    mocks: mocks || defaultMocks,
+    provide: mocks || defaultMocks,
   });
 }
 
 describe('initialization', () => {
+  // Disable vue error log temporarily
+  beforeEach(() => {
+    jest.spyOn(global.console, 'error').mockImplementation(() => {});
+  });
+  afterEach(() => {
+    global.console.error.mockRestore();
+  });
+
   it('throws error when v-slot:blueprint has more then one element', () => {
     expect(() => {
       shallowMountBlueprint(null, [], [
         '<span>content</span>',
         '<span>content</span>',
       ]);
-    }).toThrow();
+    }).toThrow(/must to have only one root element/);
   });
 
   it('throws error when the element in v-slot:blueprint is not a valid vue component', () => {
@@ -45,7 +53,7 @@ describe('initialization', () => {
 
     expect(() => {
       shallowMountBlueprint();
-    }).toThrow();
+    }).toThrow(/is not a valid vue component/);
   });
 });
 

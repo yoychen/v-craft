@@ -15,7 +15,7 @@ function shallowMountNode(props, mocks) {
 
   return shallowMount(NodeComponent, {
     propsData: props || defaultProps,
-    mocks: mocks || defaultMocks,
+    provide: mocks || defaultMocks,
   });
 }
 

@@ -79,8 +79,16 @@ function stubGetComputedStyle(style) {
     paddingRight: '25px',
     paddingBottom: '15px',
   };
-  window.getComputedStyle = () => style || defaultStyle;
+  jest.spyOn(global, 'getComputedStyle').mockImplementation(
+    () => style || defaultStyle,
+  );
 }
+
+afterEach(() => {
+  if (global.getComputedStyle.mockRestore) {
+    global.getComputedStyle.mockRestore();
+  }
+});
 
 describe('pointInside', () => {
   it('shows indicator on the bottom of the content of the element', () => {

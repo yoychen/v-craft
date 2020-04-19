@@ -14,7 +14,7 @@ function shallowMountCanvas(props = {}, defaultSlot = [], mocks) {
     slots: {
       default: defaultSlot,
     },
-    mocks: mocks || defaultMocks,
+    provide: mocks || defaultMocks,
   });
 }
 

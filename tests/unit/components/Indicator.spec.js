@@ -1,8 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
 import IndicatorComponent from '@/components/Indicator.vue';
+import Indicator from '@/core/Indicator';
 
 function createFakeIndicator() {
-  return {
+  const fakeIndicator = {
     position: {
       top: 20,
       left: 15,
@@ -14,6 +15,9 @@ function createFakeIndicator() {
     isForbidden: false,
     show: true,
   };
+  Object.setPrototypeOf(fakeIndicator, Indicator.prototype);
+
+  return fakeIndicator;
 }
 
 function shallowMountIndicator(props) {
