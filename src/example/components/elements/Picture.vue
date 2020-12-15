@@ -11,6 +11,7 @@ import PictureSetting from './PictureSetting.vue';
 import Margin from './styleSettings/Margin.vue';
 import Decoration from './styleSettings/Decoration.vue';
 import elementStyleMixin from './elementStyleMixin';
+import defaultImageUrl from './assets/default_picture_image.jpg';
 
 export default {
   mixins: [elementStyleMixin],
@@ -19,7 +20,7 @@ export default {
   },
   craft: {
     defaultProps: {
-      imageUrl: 'https://i.picsum.photos/id/419/500/400.jpg',
+      imageUrl: defaultImageUrl,
       elementStyle: {
         'margin-top': 0,
         'margin-left': 0,

@@ -31,6 +31,8 @@ import Margin from './styleSettings/Margin.vue';
 import Decoration from './styleSettings/Decoration.vue';
 import Editor from './utils/Editor.vue';
 import elementStyleMixin from './elementStyleMixin';
+import defaultImageUrl from './assets/default_carousel_image.jpg';
+import defaultImageUrl2 from './assets/default_carousel_image2.jpg';
 
 export default {
   mixins: [elementStyleMixin],
@@ -48,12 +50,12 @@ export default {
         {
           title: 'Lorem Ipsum Dolor Sit Amet',
           subtitle: 'Curabitur varius lorem nisl, non egestas leo feugiat at.',
-          background: 'https://picsum.photos/id/363/2401/1601',
+          background: defaultImageUrl,
         },
         {
           title: 'Lorem Ipsum Dolor Sit Amet',
           subtitle: 'Curabitur varius lorem nisl, non egestas leo feugiat at.',
-          background: 'https://picsum.photos/id/405/1500/844',
+          background: defaultImageUrl2,
         },
       ],
       elementStyle: {
