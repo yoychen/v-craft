@@ -2,7 +2,7 @@
   <component
     :is="component"
     v-bind="$attrs"
-    draggable="true"
+    :draggable="true"
     @dragstart="handleDragStart"
     @dragend="handleDragEnd"
     @dragstart.native="handleDragStart"
