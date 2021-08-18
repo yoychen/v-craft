@@ -3,6 +3,7 @@ import Canvas from '@/components/Canvas.vue';
 import Editor from '@/components/Editor.vue';
 import Frame from '@/components/Frame.vue';
 import settingMixin from '@/components/settingMixin';
+import Node from '@/core/Node.js';
 
 export {
   Blueprint,
@@ -10,4 +11,5 @@ export {
   Editor,
   Frame,
   settingMixin,
+  Node,
 };
