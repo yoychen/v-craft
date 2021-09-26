@@ -1,3 +1,4 @@
+import cloneDeep from 'lodash/cloneDeep';
 import { v4 as uuidv4 } from 'uuid';
 
 class Node {
@@ -180,6 +181,17 @@ class Node {
       addition: this.addition,
       uuid: this.uuid,
     };
+  }
+
+  duplicate() {
+    return new Node(
+      this.componentName,
+      cloneDeep(this.props),
+      null,
+      this.children.map((node) => node.duplicate()),
+      this.rules,
+      cloneDeep(this.addition),
+    );
   }
 }
 

@@ -59,3 +59,9 @@ Determine if the incomming page element can be dragged into itself.
  * type: `() => boolean` 
 
 Determine if the page element is draggable.
+
+### duplicate
+
+ * type: `() => Node` 
+
+Deep clone current node and its children. it will return a new node instance with a different UUID.
