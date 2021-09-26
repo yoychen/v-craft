@@ -42,7 +42,7 @@ describe('setParent', () => {
     expect(parent.children).toEqual(expect.arrayContaining([node]));
   });
 
-  it('throw erroe when parent node is not droppable', () => {
+  it('throw error when parent node is not droppable', () => {
     const parent = createNode('parent');
     const node = createNode('node');
 
@@ -50,7 +50,6 @@ describe('setParent', () => {
 
     expect(() => node.setParent(parent)).toThrow();
   });
-
 
   it('calls makeOrphan() before sets parent node', () => {
     const parent = createNode('parent');
@@ -472,5 +471,35 @@ describe('unserialize', () => {
     const node = Node.unserialize(editor, nodeData);
 
     expect(node.rules).toEqual(rules);
+  });
+});
+
+describe('duplicate', () => {
+  it('returns new node instance with different uuid', () => {
+    const node = createSecondLevelNode().parent;
+
+    const duplicatedNode = node.duplicate();
+
+    expect(duplicatedNode.uuid).not.toBe(node.uuid);
+  });
+
+  it('returns new node instance with deep cloned props and addition', () => {
+    const node = createSecondLevelNode().parent;
+
+    const duplicatedNode = node.duplicate();
+
+    expect(duplicatedNode.props).not.toBe(node.props);
+    expect(duplicatedNode.props).toMatchObject(node.props);
+
+    expect(duplicatedNode.addition).not.toBe(node.addition);
+    expect(duplicatedNode.addition).toMatchObject(node.addition);
+  });
+
+  it('copies its children', () => {
+    const node = createSecondLevelNode().parent;
+
+    const duplicatedNode = node.duplicate();
+
+    expect(duplicatedNode.children.length).toBe(node.children.length);
   });
 });
