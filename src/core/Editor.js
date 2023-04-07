@@ -1,4 +1,5 @@
 import kebabCase from 'lodash/kebabCase';
+import Vue from 'vue';
 import Indicator from './Indicator';
 import Node from './Node';
 
@@ -91,7 +92,10 @@ class Editor {
   import(plainNodesData) {
     try {
       const nodesData = JSON.parse(plainNodesData);
-      this.nodes = nodesData.map((data) => Node.unserialize(this, data));
+      this.nodes = [];
+      Vue.nextTick(() => {
+        this.nodes = nodesData.map((data) => Node.unserialize(this, data));
+      });
     } catch {
       throw new Error('The input is not valid.');
     }
