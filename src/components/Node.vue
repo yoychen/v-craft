@@ -42,11 +42,7 @@ export default {
       return this.editor.enabled && this.node.isDraggable();
     },
   },
-  provide() {
-    return {
-      node: this.node,
-    };
-  },
+  provideFields: ['node'],
   methods: {
     cancelDefault(event) {
       event.stopPropagation();

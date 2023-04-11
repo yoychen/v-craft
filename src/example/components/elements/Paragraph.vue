@@ -20,7 +20,7 @@ export default {
   props: {
     content: String,
   },
-  inject: [
+  injectFields: [
     'node',
   ],
   methods: {
