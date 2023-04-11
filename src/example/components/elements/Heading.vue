@@ -23,7 +23,7 @@ export default {
     headingType: String,
     content: String,
   },
-  inject: [
+  injectFields: [
     'node',
   ],
   methods: {
